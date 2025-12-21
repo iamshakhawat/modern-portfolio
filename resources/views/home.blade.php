@@ -296,11 +296,12 @@
 
     <main>
         <!-- 1. Header/Hero Section -->
-        <section id="home" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80vh] flex items-center">
+        <section id="home"
+            class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80vh] flex items-center">
             <div class="flex flex-col md:flex-row items-center justify-between gap-5 w-full">
 
                 <!-- Left Side: Text and Buttons -->
-                <div class="md:w-1/2 text-center md:text-left ml-12">
+                <div class="md:w-1/2 text-center md:text-left lg:ml-12">
                     <p class="text-xl text-indigo-500 dark:text-indigo-400 font-semibold mb-2">Hello, I'm</p>
                     <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight text-gray-900 dark:text-white mb-4">
                         Shakhawat
@@ -350,7 +351,7 @@
                 </div>
 
                 <!-- Right Side: Profile Photo with Glow -->
-                <div class="md:w-1/2 flex justify-center md:justify-end md:mt-0 mt-8">
+                <div class="md:w-1/2 flex justify-center md:justify-end md:mt-0 lg:mt-8">
                     <div class="profile-photo-container m-auto">
                         <div class="bubble"></div>
                         <div class="bubble" style="background-color: #ec4899;"></div>
@@ -379,28 +380,26 @@
                     <div class="md:w-1/3 flex justify-center relative">
                         <div
                             class="w-64 h-64 overflow-hidden rounded-xl shadow-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500">
-                            <img src="https://placehold.co/600x600/e5e7eb/374151?text=SH+Photo"
-                                alt="Shakhawat Hosen About" class="w-full h-full object-cover"
-                                onerror="this.style.display='none'; this.closest('div').innerHTML='<div class=\'flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-700\'><i class=\'fa-solid fa-camera text-6xl text-gray-500\'></i></div>'">
+                            @if ($about && !empty($about->image))
+                                <img src="{{ asset('storage/' . $about->image) }}" alt="Shakhawat Hosen About"
+                                    class="w-full h-full object-cover"
+                                    onerror="this.style.display='none'; this.closest('div').innerHTML='<div class=\'flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-700\'><i class=\'fa-solid fa-camera text-6xl text-gray-500\'></i></div>'">
+                            @else
+                                <img src="https://placehold.co/600x600/e5e7eb/374151?text=SH+Photo"
+                                    alt="Shakhawat Hosen About" class="w-full h-full object-cover"
+                                    onerror="this.style.display='none'; this.closest('div').innerHTML='<div class=\'flex items-center justify-center w-full h-full bg-gray-200 dark:bg-gray-700\'><i class=\'fa-solid fa-camera text-6xl text-gray-500\'></i></div>'">
+                            @endif
                         </div>
                     </div>
 
                     <!-- Right Side: Text -->
                     <div class="md:w-2/3 text-center md:text-left">
                         <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
-                            A Dedicated Laravel Enthusiast
+                            {{ $about->title ?? 'Laravel Developer & Web Enthusiast' }}
                         </h3>
                         <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                            My journey in web development began with a focus on robust backend architectures, and
-                            Laravel quickly became my framework of choice. I specialize in building scalable, secure,
-                            and maintainable applications. I have extensive experience in Eloquent ORM, API development
-                            (RESTful & GraphQL), database design, and integrating various third-party services.
-                        </p>
-                        <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed">
-                            While my core strength is in the backend, I am proficient in modern frontend technologies
-                            like Vue.js/React and utilize tools like Tailwind CSS to deliver pixel-perfect, responsive
-                            user interfaces that complement the powerful backend structure. My goal is always to deliver
-                            efficient, high-quality, and user-centric web solutions.
+                            {!! nl2br(e($about->description)) ??
+                                'I am a passionate Laravel developer with experience in building dynamic and responsive web applications. I specialize in creating clean, efficient, and scalable code while focusing on user experience and performance. My expertise includes working with databases, RESTful APIs, and front-end technologies to deliver complete solutions.' !!}
                         </p>
                     </div>
                 </div>
@@ -415,6 +414,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
 
+
                 <!-- Frontend Section -->
                 <div class="p-6 bg-white dark:bg-gray-800 rounded-2xl shadow-xl transition-colors duration-500">
                     <h3
@@ -422,67 +422,15 @@
                         <i class="fa-solid fa-code mr-2 text-indigo-500 dark:text-indigo-400"></i> Frontend
                     </h3>
                     <div class="grid grid-cols-3 sm:grid-cols-5 gap-6">
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-html5 text-4xl text-orange-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">HTML</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-css3-alt text-4xl text-blue-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">CSS</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-js text-4xl text-yellow-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">JavaScript</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-react text-4xl text-cyan-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">React</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-vuejs text-4xl text-emerald-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Vue.js</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-bootstrap text-4xl text-purple-600 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Bootstrap</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-sass text-4xl text-pink-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Sass</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-npm text-4xl text-red-600 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">NPM</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-wind text-4xl text-sky-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Tailwind</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-chart-simple text-4xl text-green-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">D3.js</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-code-branch text-4xl text-indigo-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">jQuery</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-sliders text-4xl text-fuchsia-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">AOS</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-terminal text-4xl text-gray-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">REST</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-puzzle-piece text-4xl text-teal-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Webpack</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-layer-group text-4xl text-yellow-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Blade</p>
-                        </div>
+                        @foreach ($skills->where('category', 'frontend') as $skill)
+                            <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
+                                <i class="{{ $skill->icon }} text-4xl  mb-2" style="color: {{ $skill->color }}"></i>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ $skill->name }}</p>
+                            </div>
+                        @endforeach
                     </div>
+
+
                 </div>
 
                 <!-- Backend Section -->
@@ -492,66 +440,12 @@
                         <i class="fa-solid fa-server mr-2 text-indigo-500 dark:text-indigo-400"></i> Backend
                     </h3>
                     <div class="grid grid-cols-3 sm:grid-cols-5 gap-6">
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-laravel text-4xl text-red-600 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Laravel</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-database text-4xl text-sky-600 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">MySQL</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-leaf text-4xl text-green-700 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">MongoDB</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-rocket text-4xl text-orange-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Lumen</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-fire text-4xl text-amber-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Firebase</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-layer-group text-4xl text-purple-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Eloquent</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-key text-4xl text-teal-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Auth</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-magnifying-glass text-4xl text-yellow-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Scout</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-envelope-open-text text-4xl text-cyan-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Mail</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-list-check text-4xl text-indigo-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Queues</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-lock text-4xl text-red-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Security</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-money-check-dollar text-4xl text-green-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Stripe</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-chart-bar text-4xl text-rose-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Nova</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-bolt text-4xl text-yellow-600 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Cache</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-gears text-4xl text-gray-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Middleware</p>
-                        </div>
+                        @foreach ($skills->where('category', 'backend') as $skill)
+                            <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
+                                <i class="{{ $skill->icon }} text-4xl  mb-2" style="color: {{ $skill->color }}"></i>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ $skill->name }}</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -561,67 +455,14 @@
                         class="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
                         <i class="fa-solid fa-laptop-code mr-2 text-indigo-500 dark:text-indigo-400"></i> Programming
                     </h3>
+
                     <div class="grid grid-cols-3 sm:grid-cols-5 gap-6">
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-php text-4xl text-purple-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">PHP</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-python text-4xl text-yellow-600 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Python</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-java text-4xl text-red-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Java</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-c text-4xl text-blue-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">C/C++</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-code-merge text-4xl text-orange-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">OOP</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-diagram-project text-4xl text-cyan-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Design P.</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-shield-halved text-4xl text-gray-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Security</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-lightbulb text-4xl text-yellow-300 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Algorithms</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-table text-4xl text-green-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Data Str.</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-shuffle text-4xl text-pink-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Refactoring</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-sitemap text-4xl text-indigo-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">SOLID</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-screwdriver-wrench text-4xl text-teal-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">TDD</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-cloud text-4xl text-sky-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Cloud</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-cubes text-4xl text-fuchsia-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Microservices</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-comments text-4xl text-yellow-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Clean Code</p>
-                        </div>
+                        @foreach ($skills->where('category', 'programming') as $skill)
+                            <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
+                                <i class="{{ $skill->icon }} text-4xl  mb-2" style="color: {{ $skill->color }}"></i>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ $skill->name }}</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -631,67 +472,14 @@
                         class="text-2xl font-bold text-gray-900 dark:text-white mb-6 border-b border-gray-200 dark:border-gray-700 pb-3">
                         <i class="fa-solid fa-wrench mr-2 text-indigo-500 dark:text-indigo-400"></i> Tools & Platform
                     </h3>
+                    
                     <div class="grid grid-cols-3 sm:grid-cols-5 gap-6">
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-git-alt text-4xl text-orange-600 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Git</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-github text-4xl text-gray-800 dark:text-gray-200 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">GitHub</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-docker text-4xl text-blue-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Docker</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-s text-4xl text-orange-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">SSH</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-aws text-4xl text-orange-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">AWS</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-brands fa-digital-ocean text-4xl text-blue-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">DigitalOcean</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-clipboard-list text-4xl text-pink-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">JIRA</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-code text-4xl text-cyan-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">VS Code</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-terminal text-4xl text-gray-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Linux</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-box-open text-4xl text-green-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Composer</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-bug text-4xl text-red-700 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Xdebug</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-book-open-reader text-4xl text-yellow-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Postman</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-cubes-stacked text-4xl text-indigo-500 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">Vagrant</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-circle-nodes text-4xl text-fuchsia-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">API Gateway</p>
-                        </div>
-                        <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
-                            <i class="fa-solid fa-file-invoice text-4xl text-teal-400 mb-2"></i>
-                            <p class="text-sm text-gray-600 dark:text-gray-300">OpenAPI</p>
-                        </div>
+                        @foreach ($skills->where('category', 'tools') as $skill)
+                            <div class="skill-card text-center p-3 rounded-xl bg-gray-100 dark:bg-gray-700">
+                                <i class="{{ $skill->icon }} text-4xl  mb-2" style="color: {{ $skill->color }}"></i>
+                                <p class="text-sm text-gray-600 dark:text-gray-300">{{ $skill->name }}</p>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -913,7 +701,8 @@
                                 class="absolute flex items-center justify-center w-8 h-8 bg-indigo-400 rounded-full -left-4 ring-4 ring-white dark:ring-gray-900 text-white">
                                 <i class="fa-solid fa-school"></i>
                             </span>
-                            <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Higher Secondary Certificate
+                            <h4 class="text-xl font-semibold text-gray-900 dark:text-white">Higher Secondary
+                                Certificate
                             </h4>
                             <span class="block text-sm text-gray-500 dark:text-gray-400 mb-1">2013 - 2015</span>
                             <p class="text-gray-600 dark:text-gray-300">ABC College, Science Group.</p>
@@ -964,17 +753,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-indigo-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                                 Laravel Advanced Starter
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            A boilerplate for scalable Laravel projects with built-in authentication, REST API structure, and Docker support. Used by 500+ developers.
+                            A boilerplate for scalable Laravel projects with built-in authentication, REST API
+                            structure, and Docker support. Used by 500+ developers.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 320</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 60</span>
-                            <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-200 px-2 py-1 rounded">Laravel</span>
+                            <span
+                                class="bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-200 px-2 py-1 rounded">Laravel</span>
                         </div>
                     </a>
 
@@ -983,17 +775,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-emerald-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                                 Vue Tailwind Dashboard
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            An open-source admin dashboard template built with Vue.js and Tailwind CSS. Features authentication, charts, and responsive layouts.
+                            An open-source admin dashboard template built with Vue.js and Tailwind CSS. Features
+                            authentication, charts, and responsive layouts.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 210</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 35</span>
-                            <span class="bg-emerald-100 dark:bg-emerald-800 text-emerald-600 dark:text-emerald-200 px-2 py-1 rounded">Vue.js</span>
+                            <span
+                                class="bg-emerald-100 dark:bg-emerald-800 text-emerald-600 dark:text-emerald-200 px-2 py-1 rounded">Vue.js</span>
                         </div>
                     </a>
 
@@ -1002,17 +797,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-purple-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                                 PHP API Boilerplate
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            A clean and secure PHP REST API starter with JWT authentication, rate limiting, and OpenAPI docs. Perfect for rapid backend prototyping.
+                            A clean and secure PHP REST API starter with JWT authentication, rate limiting, and OpenAPI
+                            docs. Perfect for rapid backend prototyping.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 150</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 22</span>
-                            <span class="bg-purple-100 dark:bg-purple-800 text-purple-600 dark:text-purple-200 px-2 py-1 rounded">PHP</span>
+                            <span
+                                class="bg-purple-100 dark:bg-purple-800 text-purple-600 dark:text-purple-200 px-2 py-1 rounded">PHP</span>
                         </div>
                     </a>
                     <!-- Repository 1 -->
@@ -1020,17 +818,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-indigo-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                                 Laravel Advanced Starter
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            A boilerplate for scalable Laravel projects with built-in authentication, REST API structure, and Docker support. Used by 500+ developers.
+                            A boilerplate for scalable Laravel projects with built-in authentication, REST API
+                            structure, and Docker support. Used by 500+ developers.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 320</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 60</span>
-                            <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-200 px-2 py-1 rounded">Laravel</span>
+                            <span
+                                class="bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-200 px-2 py-1 rounded">Laravel</span>
                         </div>
                     </a>
 
@@ -1039,17 +840,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-emerald-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                                 Vue Tailwind Dashboard
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            An open-source admin dashboard template built with Vue.js and Tailwind CSS. Features authentication, charts, and responsive layouts.
+                            An open-source admin dashboard template built with Vue.js and Tailwind CSS. Features
+                            authentication, charts, and responsive layouts.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 210</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 35</span>
-                            <span class="bg-emerald-100 dark:bg-emerald-800 text-emerald-600 dark:text-emerald-200 px-2 py-1 rounded">Vue.js</span>
+                            <span
+                                class="bg-emerald-100 dark:bg-emerald-800 text-emerald-600 dark:text-emerald-200 px-2 py-1 rounded">Vue.js</span>
                         </div>
                     </a>
 
@@ -1058,17 +862,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-purple-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                                 PHP API Boilerplate
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            A clean and secure PHP REST API starter with JWT authentication, rate limiting, and OpenAPI docs. Perfect for rapid backend prototyping.
+                            A clean and secure PHP REST API starter with JWT authentication, rate limiting, and OpenAPI
+                            docs. Perfect for rapid backend prototyping.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 150</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 22</span>
-                            <span class="bg-purple-100 dark:bg-purple-800 text-purple-600 dark:text-purple-200 px-2 py-1 rounded">PHP</span>
+                            <span
+                                class="bg-purple-100 dark:bg-purple-800 text-purple-600 dark:text-purple-200 px-2 py-1 rounded">PHP</span>
                         </div>
                     </a>
                     <!-- Repository 1 -->
@@ -1076,17 +883,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-indigo-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors">
                                 Laravel Advanced Starter
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            A boilerplate for scalable Laravel projects with built-in authentication, REST API structure, and Docker support. Used by 500+ developers.
+                            A boilerplate for scalable Laravel projects with built-in authentication, REST API
+                            structure, and Docker support. Used by 500+ developers.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 320</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 60</span>
-                            <span class="bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-200 px-2 py-1 rounded">Laravel</span>
+                            <span
+                                class="bg-indigo-100 dark:bg-indigo-800 text-indigo-600 dark:text-indigo-200 px-2 py-1 rounded">Laravel</span>
                         </div>
                     </a>
 
@@ -1095,17 +905,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-emerald-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
                                 Vue Tailwind Dashboard
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            An open-source admin dashboard template built with Vue.js and Tailwind CSS. Features authentication, charts, and responsive layouts.
+                            An open-source admin dashboard template built with Vue.js and Tailwind CSS. Features
+                            authentication, charts, and responsive layouts.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 210</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 35</span>
-                            <span class="bg-emerald-100 dark:bg-emerald-800 text-emerald-600 dark:text-emerald-200 px-2 py-1 rounded">Vue.js</span>
+                            <span
+                                class="bg-emerald-100 dark:bg-emerald-800 text-emerald-600 dark:text-emerald-200 px-2 py-1 rounded">Vue.js</span>
                         </div>
                     </a>
 
@@ -1114,17 +927,20 @@
                         class="group bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
                         <div class="flex items-center mb-4">
                             <i class="fa-brands fa-github text-3xl text-purple-500 mr-3"></i>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
+                            <h3
+                                class="text-xl font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors">
                                 PHP API Boilerplate
                             </h3>
                         </div>
                         <p class="text-gray-600 dark:text-gray-300 mb-4 flex-1">
-                            A clean and secure PHP REST API starter with JWT authentication, rate limiting, and OpenAPI docs. Perfect for rapid backend prototyping.
+                            A clean and secure PHP REST API starter with JWT authentication, rate limiting, and OpenAPI
+                            docs. Perfect for rapid backend prototyping.
                         </p>
                         <div class="flex items-center space-x-4 text-sm text-gray-500 dark:text-gray-400">
                             <span><i class="fa-solid fa-star text-yellow-400 mr-1"></i> 150</span>
                             <span><i class="fa-solid fa-code-branch mr-1"></i> 22</span>
-                            <span class="bg-purple-100 dark:bg-purple-800 text-purple-600 dark:text-purple-200 px-2 py-1 rounded">PHP</span>
+                            <span
+                                class="bg-purple-100 dark:bg-purple-800 text-purple-600 dark:text-purple-200 px-2 py-1 rounded">PHP</span>
                         </div>
                     </a>
 
@@ -1141,37 +957,50 @@
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <!-- Certification 1 -->
-                    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex items-center transition-colors duration-500">
-                        <img src="https://placehold.co/80x80/4f46e5/fff?text=Cert" alt="Certificate" class="w-20 h-20 rounded-xl mr-6 object-cover border-4 border-indigo-200 dark:border-indigo-700">
+                    <div
+                        class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex items-center transition-colors duration-500">
+                        <img src="https://placehold.co/80x80/4f46e5/fff?text=Cert" alt="Certificate"
+                            class="w-20 h-20 rounded-xl mr-6 object-cover border-4 border-indigo-200 dark:border-indigo-700">
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Laravel Certified Developer</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Laravel Certified
+                                Developer</h3>
                             <p class="text-gray-600 dark:text-gray-300 text-sm mb-1">Laravel Certification Program</p>
                             <span class="text-xs text-gray-500 dark:text-gray-400">Issued: 2022</span>
                         </div>
                     </div>
                     <!-- Certification 2 -->
-                    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex items-center transition-colors duration-500">
-                        <img src="https://placehold.co/80x80/8b5cf6/fff?text=Cert" alt="Certificate" class="w-20 h-20 rounded-xl mr-6 object-cover border-4 border-violet-200 dark:border-violet-700">
+                    <div
+                        class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex items-center transition-colors duration-500">
+                        <img src="https://placehold.co/80x80/8b5cf6/fff?text=Cert" alt="Certificate"
+                            class="w-20 h-20 rounded-xl mr-6 object-cover border-4 border-violet-200 dark:border-violet-700">
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Full-Stack Web Development</h3>
-                            <p class="text-gray-600 dark:text-gray-300 text-sm mb-1">Coursera (University of Michigan)</p>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Full-Stack Web Development
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mb-1">Coursera (University of Michigan)
+                            </p>
                             <span class="text-xs text-gray-500 dark:text-gray-400">Issued: 2021</span>
                         </div>
                     </div>
                     <!-- Certification 3 -->
-                    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex items-center transition-colors duration-500">
-                        <img src="https://placehold.co/80x80/ec4899/fff?text=Cert" alt="Certificate" class="w-20 h-20 rounded-xl mr-6 object-cover border-4 border-pink-200 dark:border-pink-700">
+                    <div
+                        class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex items-center transition-colors duration-500">
+                        <img src="https://placehold.co/80x80/ec4899/fff?text=Cert" alt="Certificate"
+                            class="w-20 h-20 rounded-xl mr-6 object-cover border-4 border-pink-200 dark:border-pink-700">
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">AWS Certified Cloud Practitioner</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">AWS Certified Cloud
+                                Practitioner</h3>
                             <p class="text-gray-600 dark:text-gray-300 text-sm mb-1">Amazon Web Services</p>
                             <span class="text-xs text-gray-500 dark:text-gray-400">Issued: 2023</span>
                         </div>
                     </div>
                     <!-- Certification 4 -->
-                    <div class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex items-center transition-colors duration-500">
-                        <img src="https://placehold.co/80x80/14b8a6/fff?text=Cert" alt="Certificate" class="w-20 h-20 rounded-xl mr-6 object-cover border-4 border-teal-200 dark:border-teal-700">
+                    <div
+                        class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex items-center transition-colors duration-500">
+                        <img src="https://placehold.co/80x80/14b8a6/fff?text=Cert" alt="Certificate"
+                            class="w-20 h-20 rounded-xl mr-6 object-cover border-4 border-teal-200 dark:border-teal-700">
                         <div>
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Modern JavaScript (ES6+)</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-1">Modern JavaScript (ES6+)
+                            </h3>
                             <p class="text-gray-600 dark:text-gray-300 text-sm mb-1">Udemy Online Course</p>
                             <span class="text-xs text-gray-500 dark:text-gray-400">Issued: 2020</span>
                         </div>
@@ -1227,7 +1056,8 @@
                         class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
                         <i class="fa-solid fa-cloud-arrow-up text-5xl text-sky-500 mb-4"></i>
                         <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Cloud Deployment</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-base">Deploying and managing web applications on
+                        <p class="text-gray-600 dark:text-gray-400 text-base">Deploying and managing web applications
+                            on
                             AWS, DigitalOcean, and other cloud platforms.</p>
                     </div>
                     <!-- Service 6 -->
@@ -1308,25 +1138,29 @@
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
                 <!-- Years of Experience -->
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
                     <i class="fa-solid fa-calendar-check text-5xl text-indigo-500 mb-4"></i>
                     <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">7+</div>
                     <div class="text-lg font-medium text-gray-600 dark:text-gray-300">Years Experience</div>
                 </div>
                 <!-- Projects Completed -->
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
                     <i class="fa-solid fa-diagram-project text-5xl text-violet-500 mb-4"></i>
                     <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">50+</div>
                     <div class="text-lg font-medium text-gray-600 dark:text-gray-300">Projects Completed</div>
                 </div>
                 <!-- Happy Clients -->
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
                     <i class="fa-solid fa-face-smile text-5xl text-pink-500 mb-4"></i>
                     <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">30+</div>
                     <div class="text-lg font-medium text-gray-600 dark:text-gray-300">Happy Clients</div>
                 </div>
                 <!-- Hours of Work -->
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
+                <div
+                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
                     <i class="fa-solid fa-clock text-5xl text-sky-500 mb-4"></i>
                     <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">10,000+</div>
                     <div class="text-lg font-medium text-gray-600 dark:text-gray-300">Hours of Work</div>
@@ -1341,18 +1175,41 @@
                     <span class="border-b-4 border-indigo-500 pb-1">Worked With Brands</span>
                 </h2>
                 <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-8 items-center justify-items-center">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg" alt="Google" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Google">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg" alt="Microsoft" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Microsoft">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazon/amazon-original.svg" alt="Amazon" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Amazon">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg" alt="Facebook" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Facebook">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg" alt="Apple" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Apple">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ibm/ibm-original.svg" alt="IBM" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="IBM">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg" alt="Netflix" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Netflix">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg" alt="Spotify" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Spotify">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg" alt="Twitter" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Twitter">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg" alt="LinkedIn" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="LinkedIn">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg" alt="WordPress" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="WordPress">
-                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/shopify/shopify-original.svg" alt="Shopify" class="h-12 grayscale hover:grayscale-0 transition duration-300" title="Shopify">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
+                        alt="Google" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Google">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg"
+                        alt="Microsoft" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Microsoft">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazon/amazon-original.svg"
+                        alt="Amazon" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Amazon">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg"
+                        alt="Facebook" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Facebook">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
+                        alt="Apple" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Apple">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ibm/ibm-original.svg" alt="IBM"
+                        class="h-12 grayscale hover:grayscale-0 transition duration-300" title="IBM">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg"
+                        alt="Netflix" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Netflix">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg"
+                        alt="Spotify" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Spotify">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg"
+                        alt="Twitter" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Twitter">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+                        alt="LinkedIn" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="LinkedIn">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg"
+                        alt="WordPress" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="WordPress">
+                    <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/shopify/shopify-original.svg"
+                        alt="Shopify" class="h-12 grayscale hover:grayscale-0 transition duration-300"
+                        title="Shopify">
                 </div>
             </div>
         </section>
@@ -1374,13 +1231,15 @@
                 <div class="md:w-1/2 w-full">
                     <form class="space-y-6">
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Your
+                            <label for="name"
+                                class="block text-sm font-medium text-gray-600 dark:text-gray-300">Your
                                 Name</label>
                             <input type="text" id="name" name="name" required
                                 class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none">
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Your
+                            <label for="email"
+                                class="block text-sm font-medium text-gray-600 dark:text-gray-300">Your
                                 Email</label>
                             <input type="email" id="email" name="email" required
                                 class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none">
@@ -1447,7 +1306,8 @@
 
             <!-- Copyright Text -->
             <p class="text-sm text-gray-500">
-                &copy; <span id="year"></span> Shakhawat Hosen. All rights reserved. <br class="sm:hidden"> Designed and
+                &copy; <span id="year"></span> Shakhawat Hosen. All rights reserved. <br class="sm:hidden">
+                Designed and
                 Developed with <i class="fa-solid fa-heart text-red-500"></i>.
             </p>
         </div>
@@ -1455,7 +1315,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
             new Swiper('.testimonials-swiper', {
                 loop: true,
                 grabCursor: true,
@@ -1474,7 +1334,7 @@
                     disableOnInteraction: false,
                 },
             });
-        }); 
+        });
 
 
         document.addEventListener('DOMContentLoaded', () => {
