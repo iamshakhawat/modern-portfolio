@@ -29,6 +29,7 @@ class SkillController extends Controller
             'color' => 'nullable|string|max:7',
         ]);
 
+        dd($request->all());
 
         $skill = new Skill();
         $skill->name = $request->name;

@@ -305,9 +305,7 @@
                     <!-- Project Header -->
                     <header class="space-y-4">
                         <div class="flex items-center gap-2">
-                            <span
-                                class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full text-xs font-bold uppercase tracking-wider">Case
-                                Study</span>
+
                         </div>
                         <h1
                             class="text-4xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight leading-tight">
@@ -324,6 +322,7 @@
                             <span class="hidden sm:inline text-slate-300">|</span>
                             <time class="flex items-center"><i class="fa-regular fa-calendar-check mr-2"></i> June
                                 2025</time>
+                                
                         </div>
                     </header>
 
@@ -410,14 +409,21 @@
                                 <dt class="text-slate-500 dark:text-slate-400">Client</dt>
                                 <dd class="font-semibold text-slate-900 dark:text-slate-100">TechNova Ltd.</dd>
                             </div>
-                            <div
-                                class="flex justify-between items-center py-2 border-b border-slate-50 dark:border-slate-700/50 text-sm">
-                                <dt class="text-slate-500 dark:text-slate-400">Framework</dt>
-                                <dd class="font-semibold text-red-500">Laravel 12</dd>
-                            </div>
                             <div class="flex justify-between items-center py-2 text-sm">
                                 <dt class="text-slate-500 dark:text-slate-400">Duration</dt>
                                 <dd class="font-semibold text-slate-900 dark:text-slate-100">12 Weeks</dd>
+                            </div>
+                            <div class="flex justify-between items-center py-2 text-sm">
+                                <dt class="text-slate-500 dark:text-slate-400">Rating</dt>
+                                <dd class="font-semibold text-slate-900 dark:text-slate-100">
+                                    <i class="fa-solid fa-star text-yellow-400 mr-1"></i> 4.8/5
+                                </dd>
+                            </div>
+                            <div class="flex justify-between items-center py-2 text-sm">
+                                <dt class="text-slate-500 dark:text-slate-400">Category</dt>
+                                <dd class="font-semibold text-slate-900 dark:text-slate-100"><span
+                                class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-400 rounded-full text-xs font-bold uppercase tracking-wider">Case
+                                Study</span></dd>
                             </div>
                         </dl>
                     </div>
@@ -634,7 +640,6 @@
             },
             pagination: {
                 el: ".swiper-pagination",
-                type: "progressbar",
             },
             navigation: {
                 nextEl: '.swiper-button-next',

@@ -6,6 +6,10 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Database\Seeders\UserSeeder;
 use Database\Seeders\AboutSeeder;
+use Database\Seeders\SkillSeeder;
+use Database\Seeders\CategorySeeder;
+use Database\Seeders\EducationSeeder;
+use Database\Seeders\ExperienceSeeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DatabaseSeeder extends Seeder
@@ -19,7 +23,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            AboutSeeder::class
+            AboutSeeder::class,
+            CategorySeeder::class,
+            SkillSeeder::class,
+            EducationSeeder::class,
+            ExperienceSeeder::class,
         ]);
     }
 }

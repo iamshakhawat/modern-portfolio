@@ -28,9 +28,12 @@
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+    
+
+
     @stack('css')
 
-<style>
+    <style>
         .sidebar-scroll::-webkit-scrollbar {
             width: 4px;
         }
@@ -99,18 +102,18 @@
                 /* width of sidebar */
             }
         }
-</style>
+    </style>
 </head>
 
-<body class="bg-gray-50 dark:bg-slate-900 font-sans transition-colors duration-300">
+<body class="bg-gray-50 dark:bg-slate-900 font-sans overflow-hidden transition-colors duration-300">
 
-    <div class="flex h-screen  overflow-hidden">
+    <div class="flex h-screen overflow-hidden">
 
         <!-- SIDEBAR -->
         @include('layout.admin.sidebar')
 
         <!-- MAIN CONTENT AREA -->
-        <main class="flex-1 flex flex-col min-w-0 bg-gray-50 dark:bg-slate-900 overflow-hidden">
+        <main class="flex-1 flex flex-col min-w-0 bg-gray-50 dark:bg-slate-900 overflow-hidden ">
 
             <!-- TOP NAVBAR -->
             @include('layout.admin.header')
@@ -118,7 +121,7 @@
             <!-- PAGE VIEWPORT -->
             <div class="flex-1 overflow-y-auto p-6 sidebar-scroll">
                 <div class="max-w-7xl mx-auto space-y-8">
-                    
+
 
                     @yield('content')
 
@@ -230,6 +233,7 @@
 
     @session('success')
         <script>
+            const isDarkMode  = document.documentElement.classList.contains('dark');
             Swal.fire({
                 title: "Success!",
                 text: "{{ session('success') }}",
@@ -238,11 +242,15 @@
                 confirmButtonColor: "#2563EB",
                 timer: 5000,
                 timerProgressBar: true,
+                background: isDarkMode ? '#1e1e1e' : '#ffffff',
+                color: isDarkMode ? '#ffffff' : '#000000',
+                confirmButtonColor: isDarkMode ? '#4f8cff' : '#3085d6'
             });
         </script>
     @endsession
     @session('error')
         <script>
+            const isDarkMode  = document.documentElement.classList.contains('dark');
             Swal.fire({
                 title: "Error!",
                 text: "{{ session('error') }}",
@@ -251,6 +259,9 @@
                 confirmButtonColor: "#DC2626",
                 timer: 5000,
                 timerProgressBar: true,
+                background: isDarkMode ? '#1e1e1e' : '#ffffff',
+                color: isDarkMode ? '#ffffff' : '#000000',
+                confirmButtonColor: isDarkMode ? '#4f8cff' : '#3085d6'
             });
         </script>
     @endsession

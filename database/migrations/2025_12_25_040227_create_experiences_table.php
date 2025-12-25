@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('skills', function (Blueprint $table) {
+        Schema::create('experiences', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
+            $table->string('company');
+            $table->string('duration');
             $table->string('icon');
-            $table->string('color');
-            $table->enum('category', ['frontend', 'backend', 'programming', 'tools' ]);
-            $table->boolean('status')->default(true);
+            $table->text('description');
             $table->timestamps();
         });
     }
@@ -27,19 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('skills');
+        Schema::dropIfExists('experiences');
     }
 };
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -7,10 +7,10 @@
             <div
                 class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl overflow-hidden border border-gray-100 dark:border-gray-700">
                 <div class="px-8 py-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center">
-                    <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">Skills List</h2>
-                    <a href="{{ route('admin.skills.create') }}"
+                    <h2 class="text-2xl font-extrabold text-gray-900 dark:text-white">Project List</h2>
+                    <a href="{{ route('admin.projects.create') }}"
                         class="bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-600 text-white px-2 text-xs py-2 rounded-xl font-bold shadow transition-all duration-200">
-                        <i class="fa fa-plus"></i> Add Skill
+                        <i class="fa fa-plus"></i> Add Project
                     </a>
                 </div>
                 <div class="overflow-x-auto">
@@ -19,53 +19,80 @@
                             <tr>
                                 <th
                                     class="px-4 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">
-                                    SI</th>
+                                    SI
+                                </th>
                                 <th
                                     class="px-4 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">
-                                    Category</th>
+                                    Thumbnail
+                                </th>
                                 <th
                                     class="px-4 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">
-                                    Name</th>
+                                    Title
+                                </th>
                                 <th
                                     class="px-4 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">
-                                    Icon</th>
+                                    Rating
+                                </th>
                                 <th
                                     class="px-4 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">
-                                    Color</th>
+                                    URL
+                                </th>
                                 <th
                                     class="px-4 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">
-                                    Status</th>
+                                    Status
+                                </th>
                                 <th
                                     class="px-4 py-3 text-left text-xs font-bold text-gray-700 dark:text-gray-300 uppercase">
-                                    Action</th>
+                                    Action
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-100 dark:divide-gray-700">
-                            @forelse($skills as $index => $skill)
+                            @forelse($projects as $index => $project)
                                 <tr>
                                     <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-100">
-                                        {{ $skills->firstItem() + $index }}</td>
-                                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 capitalize">
-                                        {{ $skill->category }}</td>
+                                        {{ $projects->firstItem() + $index }}</td>
                                     <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-100 font-semibold">
-                                        {{ $skill->name }}</td>
-                                    <td class="px-4 py-3">
-                                        <span class="inline-flex items-center">
-                                            <i class="{{ $skill->icon }} text-xl" style="color: {{ $skill->color }}"></i>
-                                        </span>
+                                        <img src="{{ asset('storage/' . $project->thumbnail) }}" alt="{{ $project->title }}"
+                                            class="w-16 h-16 object-cover rounded-lg">
                                     </td>
-                                    <td class="px-4 py-3 flex items-center">
-                                        @if ($skill->color)
-                                            <span
-                                                class="inline-block w-8 h-8 rounded-full border border-gray-200 dark:border-gray-600"
-                                                style="background: {{ $skill->color }}"></span>
-                                            <span class="ml-2 text-xs font-mono text-gray-500">{{ $skill->color }}</span>
+                                    <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 scapitalize">
+                                        {{ $project->title }}
+                                        <div class="mb-2 mt-2">
+                                            @foreach ($project->skills as $skill)
+                                                <i style="color: {{ $skill->color }}"
+                                                    class="{{ $skill->icon }}"></i>
+                                            @endforeach
+                                        </div>
+                                        <div>
+                                            @foreach ($project->categories as $category)
+                                                <span
+                                                    class="inline-block px-2 py-1 mr-1 mb-1 rounded-full text-xs font-bold bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300">{{ $category->name }}</span>
+                                            @endforeach
+                                        </div>
+                                    </td>
+                                    <td class="px-4 py-3 text-xs  text-gray-700 dark:text-gray-300">
+                                        {{ $project->rating }}
+                                    </td>
+                                    </td>
+                                    <td class="px-4 py-3 text-sm text-blue-700 dark:text-blue-400">
+                                        @if ($project->url)
+                                            <div class="inline-flex items-center space-x-1">
+                                                <a href="{{ $project->url }}" target="_blank"
+                                                    class="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-xs mr-1 transition">
+                                                    <i class="fas fa-link"></i>
+                                                </a>
+                                                <a href="{{ $project->github_url }}" target="_blank"
+                                                    class="inline-flex items-center justify-center w-7 h-7 rounded-full  bg-gray-900 text-white text-xs transition">
+                                                    <i class="fab fa-github"></i>
+                                                </a>
+                                            </div>
                                         @else
-                                            <span class="text-gray-400 text-sm text-center">N/A</span>
+                                            N/A
                                         @endif
                                     </td>
                                     <td class="px-4 py-3">
-                                        @if ($skill->status)
+                                        @if ($project->status)
                                             <span
                                                 class="px-3 py-1 rounded-full text-xs font-bold bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400">Active</span>
                                         @else
@@ -73,13 +100,13 @@
                                                 class="px-3 py-1 rounded-full text-xs font-bold bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400">Inactive</span>
                                         @endif
                                     </td>
-                                    <td class="px-4 py-3 flex space-x-2">
-                                        <a href="{{ route('admin.skills.edit', $skill->id) }}"
-                                            class="inline-flex items-center px-3 py-1.5 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-bold hover:bg-yellow-200 dark:hover:bg-yellow-800 transition">
+                                    <td class="px-4 py-3 text-xs  text-gray-700 dark:text-gray-300 ">
+                                        <a href="{{ route('admin.projects.edit', $project->id) }}"
+                                            class="inline-flex items-center mb-2 px-3 py-1.5 rounded-lg bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400 text-xs font-bold hover:bg-yellow-200 dark:hover:bg-yellow-800 transition">
                                             <i class="fa fa-edit mr-1"></i> Edit
                                         </a>
                                         <button type="button"
-                                            onclick="deleteData('{{ route('admin.skills.delete', $skill->id) }}')"
+                                            onclick="deleteData('{{ route('admin.projects.delete', $project->id) }}')"
                                             class="inline-flex items-center px-3 py-1.5 rounded-lg bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 text-xs font-bold hover:bg-red-200 dark:hover:bg-red-800 transition">
                                             <i class="fa fa-trash mr-1"></i> Delete
                                         </button>
@@ -87,15 +114,15 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="8" class="px-4 py-8 text-center text-gray-400 dark:text-gray-500">No
-                                        skills found.</td>
+                                    <td colspan="16" class="px-4 py-8 text-center text-gray-400 dark:text-gray-500">No
+                                        projects found.</td>
                                 </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
                 <div class="px-8 py-4 bg-gray-50 dark:bg-gray-900 border-t border-gray-100 dark:border-gray-700">
-                    {{ $skills->links('pagination::tailwind') }}
+                    {{ $projects->links('pagination::tailwind') }}
                 </div>
             </div>
         </div>

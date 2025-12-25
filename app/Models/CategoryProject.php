@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Skill extends Model
+class CategoryProject extends Model
 {
     protected $guarded = [];
 

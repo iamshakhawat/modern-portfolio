@@ -49,13 +49,21 @@
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-tools w-6 mr-2"></i><span>My Skills</span>
                 </a>
+                <a href="{{ route('admin.category') }}"
+                    class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
+                    <i class="fas fa-list w-6 mr-2"></i><span>Project Categories</span>
+                </a>
                 <a href="{{ route('admin.projects') }}"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-code w-6 mr-2"></i><span>My Projects</span>
+                    <i class="fas fa-code w-6 mr-2"></i><span>Projects</span>
                 </a>
-                <a href="#"
+                <a href="{{ route('admin.educations') }}"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-calendar-day w-6 mr-2"></i><span>Events</span>
+                    <i class="fas fa-graduation-cap w-6 mr-2"></i><span>Educations</span>
+                </a>
+                <a href="{{ route('admin.experiences') }}"
+                    class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
+                    <i class="fas fa-briefcase w-6 mr-2"></i><span>Experiences</span>
                 </a>
                 <a href="#"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
@@ -114,7 +122,8 @@
                         <a href="{{ route('admin.profile') }}"
                             class="block px-4 py-2 text-xs text-gray-500 hover:text-blue-600 dark:hover:text-white">Profile</a>
                         <a href="{{ route('admin.change.password') }}"
-                            class="block px-4 py-2 text-xs text-gray-500 hover:text-blue-600 dark:hover:text-white">Change Password</a>
+                            class="block px-4 py-2 text-xs text-gray-500 hover:text-blue-600 dark:hover:text-white">Change
+                            Password</a>
                         <a href="{{ route('logout') }}"
                             class="block px-4 py-2 text-xs text-gray-500 hover:text-blue-600 dark:hover:text-white">Logout</a>
                     </div>
