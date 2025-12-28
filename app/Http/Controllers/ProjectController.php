@@ -65,7 +65,9 @@ class ProjectController extends Controller
         $project->github_url = $request->github_url;
         $project->user_id = $request->user_id;
         $project->status = $request->status;
+        $project->is_featured = $request->is_featured ? true : false;
         $project->save();
+
 
         // Add Categories
        $project->categories()->attach($request->categories);

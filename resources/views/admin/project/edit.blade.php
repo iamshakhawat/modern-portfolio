@@ -13,7 +13,8 @@
                         <i class="fa fa-arrow-left"></i> Back
                     </a>
                 </div>
-                <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" class="px-8 py-6" enctype="multipart/form-data">
+                <form action="{{ route('admin.projects.update', $project->id) }}" method="POST" class="px-8 py-6"
+                    enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
 
@@ -43,7 +44,8 @@
                     <div class="mb-5">
                         <label for="date" class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Date
                             <span class="text-red-500">*</span></label>
-                        <input type="date" name="date" id="date" value="{{ old('date', $project->date ? \Illuminate\Support\Carbon::parse($project->date)->format('Y-m-d') : '') }}"
+                        <input type="date" name="date" id="date"
+                            value="{{ old('date', $project->date ? \Illuminate\Support\Carbon::parse($project->date)->format('Y-m-d') : '') }}"
                             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             required>
                         @error('date')
@@ -65,7 +67,8 @@
                     <div class="mb-5">
                         <label for="duration" class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Duration
                             <span class="text-red-500">*</span></label>
-                        <input type="text" name="duration" id="duration" value="{{ old('duration', $project->duration) }}"
+                        <input type="text" name="duration" id="duration"
+                            value="{{ old('duration', $project->duration) }}"
                             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             placeholder="Enter duration" required>
                         @error('duration')
@@ -76,8 +79,8 @@
                     <div class="mb-5">
                         <label for="rating" class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Rating
                             <span class="text-red-500">*</span></label>
-                        <input type="number" name="rating" id="rating" value="{{ old('rating', $project->rating) }}" step="0.1"
-                            min="0" max="5"
+                        <input type="number" name="rating" id="rating" value="{{ old('rating', $project->rating) }}"
+                            step="0.1" min="0" max="5"
                             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             placeholder="Enter rating" required>
                         @error('rating')
@@ -99,7 +102,8 @@
                     <div class="mb-5">
                         <label for="github_url" class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">GitHub
                             URL</label>
-                        <input type="url" name="github_url" id="github_url" value="{{ old('github_url', $project->github_url) }}"
+                        <input type="url" name="github_url" id="github_url"
+                            value="{{ old('github_url', $project->github_url) }}"
                             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             placeholder="Enter GitHub URL">
                         @error('github_url')
@@ -115,7 +119,8 @@
                             required>
                             <option value="">Select User</option>
                             @foreach ($users as $user)
-                                <option value="{{ $user->id }}" {{ old('user_id', $project->user_id) == $user->id ? 'selected' : '' }}>
+                                <option value="{{ $user->id }}"
+                                    {{ old('user_id', $project->user_id) == $user->id ? 'selected' : '' }}>
                                     {{ $user->name }}</option>
                             @endforeach
                         </select>
@@ -129,8 +134,10 @@
                             class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Status</label>
                         <select name="status" id="status"
                             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-                            <option value="1" {{ old('status', $project->status) == 1 ? 'selected' : '' }}>Active</option>
-                            <option value="0" {{ old('status', $project->status) == 0 ? 'selected' : '' }}>Inactive</option>
+                            <option value="1" {{ old('status', $project->status) == 1 ? 'selected' : '' }}>Active
+                            </option>
+                            <option value="0" {{ old('status', $project->status) == 0 ? 'selected' : '' }}>Inactive
+                            </option>
                         </select>
                         @error('status')
                             <span class="text-xs text-red-500">{{ $message }}</span>
@@ -176,9 +183,10 @@
                     <div class="mb-5">
                         <label for="thumbnail"
                             class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Thumbnail</label>
-                        @if($project->thumbnail)
+                        @if ($project->thumbnail)
                             <div class="mb-2">
-                                <img src="{{ asset('storage/'.$project->thumbnail) }}" alt="Current Thumbnail" class="h-20 rounded">
+                                <img src="{{ asset('storage/' . $project->thumbnail) }}" alt="Current Thumbnail"
+                                    class="h-20 rounded">
                             </div>
                         @endif
                         <input type="file" name="thumbnail" id="thumbnail"
@@ -193,17 +201,19 @@
                     <div class="mb-5">
                         <label for="images"
                             class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Project Images</label>
-                        @if($project->images && count($project->images))
+                        @if ($project->images && count($project->images))
                             <div class="flex flex-wrap gap-2 mb-2">
-                                @foreach($project->images as $img)
+                                @foreach ($project->images as $img)
                                     <div class="relative group cursor-pointer h-16 w-16">
-                                        <button type="button" onclick="deleteData('{{ route('admin.projects.image.delete', $img->id) }}')"
-                                           class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded"
-                                           style="z-index:2;">
+                                        <button type="button"
+                                            onclick="deleteData('{{ route('admin.projects.image.delete', $img->id) }}')"
+                                            class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-200 rounded"
+                                            style="z-index:2;">
                                             <i class="fa fa-trash text-white text-lg"></i>
                                         </button>
-                                        <img src="{{ asset('storage/'.$img->image_path) }}" alt="Project Image"
-                                             class="h-16 w-16 object-cover rounded transition-opacity duration-200 group-hover:opacity-70" style="z-index:1;">
+                                        <img src="{{ asset('storage/' . $img->image_path) }}" alt="Project Image"
+                                            class="h-16 w-16 object-cover rounded transition-opacity duration-200 group-hover:opacity-70"
+                                            style="z-index:1;">
                                     </div>
                                 @endforeach
                             </div>
@@ -216,6 +226,15 @@
                         @enderror
                     </div>
 
+                    {{-- is_featured checkbox --}}
+                    <div class="mb-5">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="is_featured" value="1"
+                                {{ old('is_featured', $project->is_featured) ? 'checked' : '' }}
+                                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">Featured</span>
+                        </label>
+                    </div>
 
                     <div class="flex justify-end">
                         <button type="submit"
@@ -233,6 +252,8 @@
 @push('css')
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
 @endpush
 
 @push('js')
@@ -245,7 +266,7 @@
                 width: '100%'
             });
         });
-        
+
         function deleteData(url) {
             Swal.fire({
                 title: 'Are you sure?',
@@ -262,4 +283,36 @@
             });
         }
     </script>
-@endpush    
+@endpush
+
+@push('js')
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#select2').select2({
+                placeholder: "Select skills",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+        
+    const easyMDE = new EasyMDE({
+        element: document.getElementById('description'),
+        minHeight: "400px",
+        autofocus: false,
+        spellChecker: false,
+        placeholder: "Write your description in Markdown...",
+        status: ["lines", "words", "cursor"],
+        toolbar: [
+            "bold", "italic", "strikethrough", "|",
+            "heading", "|",
+            "quote", "unordered-list", "ordered-list", "|",
+            "link", "table", "|",
+            "code", "horizontal-rule", "|",
+            "preview", "side-by-side", "fullscreen"
+        ]
+    });
+</script>
+@endpush
+
+

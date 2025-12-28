@@ -51,7 +51,7 @@
                 </a>
                 <a href="{{ route('admin.category') }}"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-list w-6 mr-2"></i><span>Project Categories</span>
+                    <i class="fas fa-list w-6 mr-2"></i><span>Categories</span>
                 </a>
                 <a href="{{ route('admin.projects') }}"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">

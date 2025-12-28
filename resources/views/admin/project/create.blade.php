@@ -34,7 +34,7 @@
                                 class="text-red-500">*</span></label>
                         <textarea name="description" id="description" rows="4"
                             class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                            placeholder="Enter project description" required>{{ old('description') }}</textarea>
+                            placeholder="Enter project description" >{{ old('description') }}</textarea>
                         @error('description')
                             <span class="text-xs text-red-500">{{ $message }}</span>
                         @enderror
@@ -206,6 +206,14 @@
                         @enderror
                     </div>
 
+                    {{-- is_featured checkbox --}}
+                    <div class="mb-5">
+                        <label class="inline-flex items-center">
+                            <input type="checkbox" name="is_featured" value="1" {{ old('is_featured') ? 'checked' : '' }}
+                                class="rounded border-gray-300 text-indigo-600 shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                            <span class="ml-2 text-sm font-medium text-gray-700 dark:text-gray-300">Featured</span>
+                        </label>
+                    </div>
 
                     <div class="flex justify-end">
                         <button type="submit"
@@ -218,8 +226,16 @@
         </div>
     </div>
 
+
+
+
+
+
 @endsection
 @push('css')
+<link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+<script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 @endpush
@@ -234,5 +250,22 @@
                 width: '100%'
             });
         });
-    </script>
+        
+    const easyMDE = new EasyMDE({
+        element: document.getElementById('description'),
+        minHeight: "400px",
+        autofocus: false,
+        spellChecker: false,
+        placeholder: "Write your description in Markdown...",
+        status: ["lines", "words", "cursor"],
+        toolbar: [
+            "bold", "italic", "strikethrough", "|",
+            "heading", "|",
+            "quote", "unordered-list", "ordered-list", "|",
+            "link", "table", "|",
+            "code", "horizontal-rule", "|",
+            "preview", "side-by-side", "fullscreen"
+        ]
+    });
+</script>
 @endpush

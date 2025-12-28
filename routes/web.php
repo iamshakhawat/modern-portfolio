@@ -12,7 +12,9 @@ use App\Http\Controllers\EducationController;
 use App\Http\Controllers\ExperienceController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/project/{id}', [HomeController::class, 'show'])->name('project.show');
+Route::get('/projects', [HomeController::class, 'allprojects'])->name('project.all');
+Route::get('/project/{slug}', [HomeController::class, 'showProject'])->name('project.show');
+Route::get('/projects/load-more', [HomeController::class, 'loadmore'])->name('loadmore');
 
 // Auth routes...
 Route::middleware('guest')->group(function () {
@@ -34,6 +36,11 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     // Change Password
     Route::get('/change-password', [AdminController::class, 'changePassword'])->name('admin.change.password');
     Route::post('/change-password', [AdminController::class, 'updatePassword'])->name('admin.change.password.update');
+
+
+    // Hero Section
+    // Route::get('/hero', [AdminController::class, 'hero'])->name('admin.hero');
+    // Route::post('/hero/update', [AdminController::class, 'updateHero'])->name('admin.hero.update');
 
     // About Section
     Route::get('/about', [AboutController::class, 'about'])->name('admin.about');
@@ -84,6 +91,8 @@ Route::middleware(['auth'])->prefix('/admin')->group(function () {
     Route::put('/experiences/update/{id}', [ExperienceController::class, 'updateExperience'])->name('admin.experiences.update');
     Route::get('/experiences/delete/{id}', [ExperienceController::class, 'deleteExperience'])->name('admin.experiences.delete');
     
+
+
 
 
 });

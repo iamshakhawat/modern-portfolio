@@ -13,19 +13,20 @@ return new class extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('slug')->unique();
+            $table->string('title')->unique();
+            $table->string('slug');
             $table->text('description');
             $table->date('date');
             $table->string('client');
             $table->string('duration');
             $table->float('rating', 2, 1);
             $table->string('url');
-            $table->string('github_url')->nullable();
+            $table->string('github_url');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('thumbnail')->nullable();
             $table->boolean('status')->default(true);
+            $table->boolean('is_featured')->default(false);
             $table->timestamps();
         });
     }
