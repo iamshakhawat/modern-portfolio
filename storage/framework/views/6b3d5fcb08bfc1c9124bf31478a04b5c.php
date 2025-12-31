@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Admin Dashboard Pro')</title>
+    <title><?php echo $__env->yieldContent('title', 'Admin Dashboard Pro'); ?></title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
@@ -31,7 +31,7 @@
 
 
 
-    @stack('css')
+    <?php echo $__env->yieldPushContent('css'); ?>
 
     <style>
         .sidebar-scroll::-webkit-scrollbar {
@@ -110,20 +110,20 @@
     <div class="flex h-screen overflow-hidden">
 
         <!-- SIDEBAR -->
-        @include('layout.admin.sidebar')
+        <?php echo $__env->make('layout.admin.sidebar', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
         <!-- MAIN CONTENT AREA -->
         <main class="flex-1 flex flex-col min-w-0 bg-gray-50 dark:bg-slate-900 overflow-hidden ">
 
             <!-- TOP NAVBAR -->
-            @include('layout.admin.header')
+            <?php echo $__env->make('layout.admin.header', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
             <!-- PAGE VIEWPORT -->
             <div class="flex-1 overflow-y-auto p-6 sidebar-scroll">
                 <div class="max-w-7xl mx-auto space-y-8">
 
 
-                    @yield('content')
+                    <?php echo $__env->yieldContent('content'); ?>
 
 
                 </div>
@@ -316,16 +316,19 @@
         window.onload = initLayout;
     </script>
 
-    @stack('js')
+    <?php echo $__env->yieldPushContent('js'); ?>
 
     <!-- jQuery CDN -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    @session('success')
+    <?php $__sessionArgs = ['success'];
+if (session()->has($__sessionArgs[0])) :
+if (isset($value)) { $__sessionPrevious[] = $value; }
+$value = session()->get($__sessionArgs[0]); ?>
         <script>
             const isDarkMode = document.documentElement.classList.contains('dark');
             Swal.fire({
                 title: "Success!",
-                text: "{{ session('success') }}",
+                text: "<?php echo e(session('success')); ?>",
                 icon: "success",
                 confirmButtonText: "OK",
                 confirmButtonColor: "#2563EB",
@@ -336,13 +339,20 @@
                 confirmButtonColor: isDarkMode ? '#4f8cff' : '#3085d6'
             });
         </script>
-    @endsession
-    @session('error')
+    <?php unset($value);
+if (isset($__sessionPrevious) && !empty($__sessionPrevious)) { $value = array_pop($__sessionPrevious); }
+if (isset($__sessionPrevious) && empty($__sessionPrevious)) { unset($__sessionPrevious); }
+endif;
+unset($__sessionArgs); ?>
+    <?php $__sessionArgs = ['error'];
+if (session()->has($__sessionArgs[0])) :
+if (isset($value)) { $__sessionPrevious[] = $value; }
+$value = session()->get($__sessionArgs[0]); ?>
         <script>
             const isDarkMode = document.documentElement.classList.contains('dark');
             Swal.fire({
                 title: "Error!",
-                text: "{{ session('error') }}",
+                text: "<?php echo e(session('error')); ?>",
                 icon: "error",
                 confirmButtonText: "OK",
                 confirmButtonColor: "#DC2626",
@@ -353,7 +363,11 @@
                 confirmButtonColor: isDarkMode ? '#4f8cff' : '#3085d6'
             });
         </script>
-    @endsession
+    <?php unset($value);
+if (isset($__sessionPrevious) && !empty($__sessionPrevious)) { $value = array_pop($__sessionPrevious); }
+if (isset($__sessionPrevious) && empty($__sessionPrevious)) { unset($__sessionPrevious); }
+endif;
+unset($__sessionArgs); ?>
 
     <script>
         refreshBtn = document.getElementById('refreshBtn');
@@ -363,7 +377,7 @@
 
             $.ajax({
                 type: "get",
-                url: "{{ route('clear.cache') }}",
+                url: "<?php echo e(route('clear.cache')); ?>",
                 success: function(response) {
                     refreshIcon.classList.remove('fa-spin');
                     console.log(response);
@@ -378,3 +392,4 @@
 </body>
 
 </html>
+<?php /**PATH C:\Users\Shakhawat\Desktop\Portfolio\resources\views/layout/admin/admin.blade.php ENDPATH**/ ?>

@@ -25,6 +25,8 @@ Route::get('/projects', [HomeController::class, 'allprojects'])->name('project.a
 Route::get('/project/{slug}', [HomeController::class, 'showProject'])->name('project.show');
 Route::get('/projects/load-more', [HomeController::class, 'loadmore'])->name('loadmore');
 Route::post('/contact-store', [HomeController::class, 'storeContact'])->name('contact.store');
+Route::get('/clear/cache', [HomeController::class, 'clear'])->name('clear.cache');
+
 
 // Download Cv  
 Route::get('/download-cv', [HomeController::class, 'downloadCV'])->name('cv.download');

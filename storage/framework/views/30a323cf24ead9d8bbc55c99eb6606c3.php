@@ -40,7 +40,7 @@
                 <div class="flex items-center space-x-2 lg:space-x-5">
 
                     <!-- Website -->
-                    <a href="{{ route('home') }}" target="_blank"
+                    <a href="<?php echo e(route('home')); ?>" target="_blank"
                         class="w-10 h-10 flex items-center justify-center text-gray-500 hover:bg-gray-100 dark:hover:bg-slate-700 rounded-full transition-colors">
                         <i class="fas fa-home text-lg"></i>
                     </a>
@@ -103,12 +103,12 @@
                             class="flex items-center space-x-3 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-slate-700 transition-colors group">
                             <div
                                 class="w-9 h-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-white ring-2 ring-gray-100 dark:ring-slate-700 group-hover:ring-blue-400 transition-all pointer-events-none">
-                                @if (Auth::user()->photo)
-                                    <img src="{{ Auth::user()->photo }}" alt="Profile Photo"
+                                <?php if(Auth::user()->photo): ?>
+                                    <img src="<?php echo e(Auth::user()->photo); ?>" alt="Profile Photo"
                                         class="w-9 h-9 rounded-full object-cover">
-                                @else
+                                <?php else: ?>
                                     <i class="fas fa-user-ninja"></i>
-                                @endif
+                                <?php endif; ?>
                             </div>
                             <i
                                 class="fas fa-chevron-down text-gray-400 text-[10px] hidden sm:block pointer-events-none"></i>
@@ -116,20 +116,21 @@
                         <div id="profileDropdown"
                             class="hidden-dropdown absolute right-0 mt-4 w-64 bg-white dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded-2xl shadow-2xl py-2 dropdown-animate">
                             <div class="px-5 py-4 border-b border-gray-50 dark:border-slate-700 mb-2">
-                                <p class="text-sm font-bold text-gray-800 dark:text-white mt-1">{{ Auth::user()->name }}
+                                <p class="text-sm font-bold text-gray-800 dark:text-white mt-1"><?php echo e(Auth::user()->name); ?>
+
                                 </p>
                                 <small class="text-xs text-gray-400">Administrator</small>
                             </div>
-                            <a href="{{ route('admin.profile') }}"
+                            <a href="<?php echo e(route('admin.profile')); ?>"
                                 class="flex items-center px-5 py-2.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
                                 <i class="far fa-user-circle w-6 mr-2 text-gray-400"></i> My Profile
                             </a>
-                            <a href="{{ route('admin.change.password') }}"
+                            <a href="<?php echo e(route('admin.change.password')); ?>"
                                 class="flex items-center px-5 py-2.5 text-sm text-gray-600 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-slate-700 transition-colors">
                                 <i class="fas fa-key w-6 mr-2 text-gray-400"></i> Change Password
                             </a>
                             <div class="my-2 border-t border-gray-50 dark:border-slate-700"></div>
-                            <a href="{{ route('logout') }}"
+                            <a href="<?php echo e(route('logout')); ?>"
                                 class="flex items-center px-5 py-3 text-sm font-bold text-rose-600 hover:bg-rose-50 dark:hover:bg-rose-900/20 transition-colors">
                                 <i class="fas fa-power-off w-6 mr-2"></i> Sign Out
                             </a>
@@ -137,3 +138,4 @@
                     </div>
                 </div>
             </header>
+<?php /**PATH C:\Users\Shakhawat\Desktop\Portfolio\resources\views/layout/admin/header.blade.php ENDPATH**/ ?>

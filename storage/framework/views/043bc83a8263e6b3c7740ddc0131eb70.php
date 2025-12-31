@@ -2,7 +2,7 @@
             class="sidebar-transition -translate-x-full fixed inset-y-0 left-0 z-50 w-72 bg-white dark:bg-slate-800 border-r border-gray-200 dark:border-slate-700 lg:relative lg:translate-x-0">
             <!-- Sidebar Header -->
             <div class="flex items-center justify-between h-20 px-6 border-b border-gray-100 dark:border-slate-700">
-                <a href="{{ route('admin.dashboard') }}" class="flex items-center space-x-3">
+                <a href="<?php echo e(route('admin.dashboard')); ?>" class="flex items-center space-x-3">
                     <div class="w-9 h-9 bg-blue-600 rounded-lg flex items-center justify-center">
                         <i class="fas fa-rocket text-white"></i>
                     </div>
@@ -37,65 +37,65 @@
                 </div>
 
                 <!-- 15+ Links -->
-                <a href="{{ route('admin.hero') }}"
+                <a href="<?php echo e(route('admin.hero')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-layer-group w-6 mr-2"></i><span>Hero</span>
                 </a>
-                <a href="{{ route('admin.about') }}"
+                <a href="<?php echo e(route('admin.about')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-circle-info w-6 mr-2"></i><span>About Me</span>
                 </a>
-                <a href="{{ route('admin.skills') }}"
+                <a href="<?php echo e(route('admin.skills')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-tools w-6 mr-2"></i><span>My Skills</span>
                 </a>
-                <a href="{{ route('admin.category') }}"
+                <a href="<?php echo e(route('admin.category')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-list w-6 mr-2"></i><span>Categories</span>
                 </a>
-                <a href="{{ route('admin.projects') }}"
+                <a href="<?php echo e(route('admin.projects')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-code w-6 mr-2"></i><span>Projects</span>
                 </a>
-                <a href="{{ route('admin.educations') }}"
+                <a href="<?php echo e(route('admin.educations')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-graduation-cap w-6 mr-2"></i><span>Educations</span>
                 </a>
-                <a href="{{ route('admin.experiences') }}"
+                <a href="<?php echo e(route('admin.experiences')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-briefcase w-6 mr-2"></i><span>Experiences</span>
                 </a>
-                <a href="{{ route('admin.services') }}"
+                <a href="<?php echo e(route('admin.services')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-concierge-bell w-6 mr-2"></i><span>Services</span>
                 </a>
-                <a href="{{ route('admin.testimonials') }}"
+                <a href="<?php echo e(route('admin.testimonials')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-comments w-6 mr-2"></i><span>Testimonials</span>
                 </a>
-                <a href="{{ route('admin.achievements') }}"
+                <a href="<?php echo e(route('admin.achievements')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-trophy w-6 mr-2"></i><span>Achievements</span>
                 </a>
-                <a href="{{ route('admin.brands') }}"
+                <a href="<?php echo e(route('admin.brands')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fab fa-flickr w-6 mr-2"></i><span>Brands</span>
                 </a>
-                <a href="{{ route('admin.contacts') }}"
+                <a href="<?php echo e(route('admin.contacts')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-envelope w-6 mr-2"></i><span>Contacts</span>
                 </a>
-                <a href="{{ route('admin.socials') }}"
+                <a href="<?php echo e(route('admin.socials')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fab fa-twitter w-6 mr-2"></i><span>Socials</span>
                 </a>
-                <a href="{{ route('admin.cv') }}"
+                <a href="<?php echo e(route('admin.cv')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-file-alt w-6 mr-2"></i><span>My CV</span>
                 </a>
                 
 
-                <a href="{{ route('admin.certifications') }}"
+                <a href="<?php echo e(route('admin.certifications')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-certificate w-6 mr-2"></i><span>Certifications</span> 
                 </a>
@@ -106,22 +106,23 @@
                         class="w-full flex items-center justify-between px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all group">
                         <div class="flex items-center pointer-events-none">
                             <i class="fas fa-user w-6 mr-2"></i>
-                            <span>{{ Auth::user()->name }}</span>
+                            <span><?php echo e(Auth::user()->name); ?></span>
                         </div>
                         <i class="fas fa-chevron-right text-[10px] transition-transform pointer-events-none"
                             id="arrow-sub-auth"></i>
                     </button>
                     <div id="sub-auth"
                         class="hidden-dropdown mt-1 ml-10 space-y-1 border-l-2 border-gray-100 dark:border-slate-700">
-                        <a href="{{ route('admin.profile') }}"
+                        <a href="<?php echo e(route('admin.profile')); ?>"
                             class="block px-4 py-2 text-xs text-gray-500 hover:text-blue-600 dark:hover:text-white">Profile</a>
-                        <a href="{{ route('admin.change.password') }}"
+                        <a href="<?php echo e(route('admin.change.password')); ?>"
                             class="block px-4 py-2 text-xs text-gray-500 hover:text-blue-600 dark:hover:text-white">Change
                             Password</a>
-                        <a href="{{ route('logout') }}"
+                        <a href="<?php echo e(route('logout')); ?>"
                             class="block px-4 py-2 text-xs text-gray-500 hover:text-blue-600 dark:hover:text-white">Logout</a>
                     </div>
                 </div>
 
             </nav>
         </aside>
+<?php /**PATH C:\Users\Shakhawat\Desktop\Portfolio\resources\views/layout/admin/sidebar.blade.php ENDPATH**/ ?>
