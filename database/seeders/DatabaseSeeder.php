@@ -44,7 +44,7 @@ class DatabaseSeeder extends Seeder
             AchievementSeeder::class,
             SocialSeeder::class,
             ImageProjectSeeder::class,
-            ProjectSeeder::class,
+            // ProjectSeeder::class,
         ]);
     }
 }

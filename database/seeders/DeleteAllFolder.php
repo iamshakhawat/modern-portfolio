@@ -21,6 +21,9 @@ class DeleteAllFolder extends Seeder
         }
 
         Artisan::call('storage:link');
+        Artisan::call('config:cache');
+        Artisan::call('config:clear');
+        Artisan::call('optimize:clear');
         $this->command->info('Created storage link successfully.');
     }
 }
