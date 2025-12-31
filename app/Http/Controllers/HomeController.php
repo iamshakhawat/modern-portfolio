@@ -19,6 +19,7 @@ use App\Models\Testimonial;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\Certification;
+use Illuminate\Support\Facades\Http;
 
 class HomeController extends Controller
 {
@@ -145,16 +146,34 @@ class HomeController extends Controller
             'email' => 'required|email|max:255',
             'subject' => 'required|string|max:255',
             'message' => 'required|string',
+            'g-recaptcha-response' => 'required',
         ]);
 
-        $contact = new Contact();
-        $contact->name = $request->name;
-        $contact->email = $request->email;
-        $contact->subject = $request->subject;
-        $contact->message = $request->message;
-        $contact->save();
+        $response = Http::asForm()->post(
+            'https://www.google.com/recaptcha/api/siteverify',
+            [
+                'secret'   => config('recaptcha.secret_key'),
+                'response' => $request->input('g-recaptcha-response'),
+                'remoteip' => $request->ip(),
+            ]
+        );
 
-        return redirect()->back()->with('success', 'Your message has been sent successfully!')->withFragment('contact');
+
+        if (!$response->json('success')) {
+            return back()
+                ->withErrors(['g-recaptcha-response' => 'reCAPTCHA verification failed'])
+                ->withInput()->withFragment('contact');
+        } else {
+
+            $contact = new Contact();
+            $contact->name = $request->name;
+            $contact->email = $request->email;
+            $contact->subject = $request->subject;
+            $contact->message = $request->message;
+            $contact->save();
+
+            return redirect()->back()->with('success', 'Your message has been sent successfully!')->withFragment('contact');
+        }
     }
 
     // download CV

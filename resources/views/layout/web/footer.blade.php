@@ -11,19 +11,18 @@
             @php
                 $hero = \App\Models\Hero::first();
             @endphp
-            @if($hero && $hero->hero_img && !empty($hero->hero_img))
-                <img src="{{ asset('storage/' . $hero->hero_img) }}" alt="Mini Photo"
-                    class="w-full h-full object-cover"
+            @if ($hero && $hero->hero_img && !empty($hero->hero_img))
+                <img src="{{ asset('storage/' . $hero->hero_img) }}" alt="Mini Photo" class="w-full h-full object-cover"
                     onerror="this.style.display='none'; this.closest('div').innerHTML='<i class=\'fa-solid fa-user text-2xl text-indigo-500\'></i>'">
             @else
-
-            <img src="https://placehold.co/48x48/e5e7eb/1f2937?text=S" alt="Mini Photo" class="w-full h-full object-cover"
-                onerror="this.style.display='none'; this.closest('div').innerHTML='<i class=\'fa-solid fa-user text-2xl text-indigo-500\'></i>'">
+                <img src="https://placehold.co/48x48/e5e7eb/1f2937?text=S" alt="Mini Photo"
+                    class="w-full h-full object-cover"
+                    onerror="this.style.display='none'; this.closest('div').innerHTML='<i class=\'fa-solid fa-user text-2xl text-indigo-500\'></i>'">
             @endif
         </div>
 
         <!-- Name -->
-        <p class="text-xl font-bold text-gray-900 dark:text-white mb-3">{{ $user->name ?? "Shakhawat Hosen" }}</p>
+        <p class="text-xl font-bold text-gray-900 dark:text-white mb-3">{{ $user->name ?? 'Shakhawat Hosen' }}</p>
 
         <!-- Social Media Icons (Footer) -->
         <div class="flex justify-center space-x-6 text-xl text-gray-600 dark:text-gray-400 mb-4">
@@ -46,6 +45,8 @@
     </div>
 </footer>
 
+
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script src="{{ asset('web/js/app.js') }}"></script>
 @session('success')
