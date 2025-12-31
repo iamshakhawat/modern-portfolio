@@ -1,12 +1,17 @@
+const plugin = require('tailwindcss/plugin');
 
-tailwind = {
+module.exports = {
     darkMode: 'class',
+    content: [
+        "./resources/views/**/*.blade.php",
+        "./resources/js/**/*.js",
+    ],
     theme: {
         extend: {
             colors: {
                 primary: '#4f46e5',
-                accent: '#8b5cf6'
-            }
-        }
-    }
+                accent: '#8b5cf6',
+            },
+        },
+    },
 }

@@ -57,8 +57,7 @@
                                             class="w-16 h-16 object-cover rounded-lg">
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 scapitalize">
-                                        <?php echo e($project->title); ?>
-
+                                        <a class="hover:underline" target="_blank" href="<?php echo e(route('project.show',$project->slug)); ?>"><?php echo e($project->title); ?></a>
                                         <div class="mb-2 mt-2">
                                             <?php $__currentLoopData = $project->skills; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $skill): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                 <i style="color: <?php echo e($skill->color); ?>"

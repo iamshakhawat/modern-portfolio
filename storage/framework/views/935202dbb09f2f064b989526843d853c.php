@@ -168,7 +168,7 @@ unset($__errorArgs, $__bag); ?>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            <?php if(@session('noaccerror')): ?>
+            <?php if(@session('error')): ?>
                 Swal.fire({
                     icon: 'error',
                     title: 'Login Failed',

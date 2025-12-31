@@ -63,8 +63,8 @@
 
 
                     <!-- Article Body -->
-                    <div id="content" class="text-slate-900 dark:text-white">
-                        {{ $project->description }}
+                    <div id="content" class="porse markdown max-w-none prose-slate dark:prose-invert prose-a:text-indigo-600 prose-a:dark:text-indigo-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg">
+                        {!! Illuminate\Support\Str::markdown($project->description) !!}
                     </div>
 
 
@@ -154,3 +154,5 @@
         </div>
     </main>
 @endsection
+@push('css')
+@endpush

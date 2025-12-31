@@ -2,28 +2,27 @@
 @section('content')
     <main>
         <!-- 1. Header/Hero Section -->
-        <section id="home" class="py-16 md:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80vh] flex items-center">
-            <div class="flex flex-col md:flex-row items-center justify-between gap-5 w-full">
+        <section id="home" class="py-16 md:py-24  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 min-h-[80vh] flex items-center">
+            <div class="flex flex-col-reverse flex-col md:flex-row items-center justify-between gap-5 w-full">
 
                 <!-- Left Side: Text and Buttons -->
-                <div class="md:w-1/2 text-center md:text-left lg:ml-12">
-                    <p class="text-xl text-indigo-500 dark:text-indigo-400 font-semibold mb-2">Hello, I'm</p>
-                    <h1 class="text-5xl sm:text-7xl font-extrabold leading-tight text-gray-900 dark:text-white mb-4">
+                <div class="md:w-1/2  lg:ml-12">
+                    <p class="text-xl text-center md:text-left text-indigo-500 dark:text-indigo-400 font-semibold mb-2">Hello, I'm</p>
+                    <h1 class="text-5xl text-center md:text-left sm:text-7xl font-extrabold leading-tight text-gray-900 dark:text-white mb-4">
                         Shakhawat
                     </h1>
-                    <h2 class="text-2xl sm:text-3xl font-medium text-gray-600 dark:text-gray-400 mb-6">
-                        Professional <span class="text-violet-600 dark:text-violet-400">Web Developer</span>
+                    <h2 class="text-2xl text-center md:text-left sm:text-3xl font-medium text-gray-600 dark:text-gray-400 mb-6">
+                        Professional <span class="text-violet-600 dark:text-violet-400">{{ $hero->title }}</span>
                     </h2>
-                    <p class="text-lg text-gray-600 dark:text-gray-400 mb-10 max-w-lg mx-auto md:mx-0">
-                        I'm a Laravel Developer passionate about building modern, responsive, and user-friendly web
-                        interfaces using Laravel and a strong focus on clean architecture.
+                    <p class="text-lg  md:text-left text-gray-600 dark:text-gray-400 text-justify mb-10 max-w-lg mx-2 p-1 ">
+                        {{ $hero->subtitle }}
                     </p>
 
                     <!-- Buttons -->
                     <div class="flex justify-center md:justify-start space-x-4 mb-10">
-                        <a href="#"
+                        <a href="{{ route('cv.download') }}" target="_blank"
                             class="inline-flex items-center px-6 py-3 text-base font-medium rounded-xl text-white btn-primary focus:outline-none">
-                            <i class="fa-solid fa-file-arrow-down mr-3"></i> Download Resume
+                            <i class="fa-solid fa-file-arrow-down mr-3"></i> Download CV
                         </a>
                         <a href="#contact"
                             class="inline-flex items-center px-6 py-3 text-base font-medium rounded-xl btn-secondary focus:outline-none">
@@ -33,23 +32,15 @@
 
                     <!-- Social Media Icons -->
                     <div class="flex justify-center md:justify-start space-x-6 text-2xl text-gray-500 dark:text-gray-400">
-                        <a href="https://github.com/shakhawat" target="_blank"
-                            class="hover:text-gray-900 dark:hover:text-white transition-colors duration-300" title="GitHub">
-                            <i class="fa-brands fa-github"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/shakhawat" target="_blank"
-                            class="hover:text-indigo-600 dark:hover:text-indigo-500 transition-colors duration-300"
-                            title="LinkedIn">
-                            <i class="fa-brands fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://twitter.com/shakhawat" target="_blank"
-                            class="hover:text-sky-400 transition-colors duration-300" title="X (Twitter)">
-                            <i class="fa-brands fa-x-twitter"></i>
-                        </a>
-                        <a href="mailto:shakhawat@example.com" class="hover:text-red-500 transition-colors duration-300"
-                            title="Google Mail">
-                            <i class="fa-brands fa-google"></i>
-                        </a>
+                        @foreach ($socials as $social)
+                            <a href="{{ $social->url }}" target="_blank"
+                                class=" transition-colors duration-300"
+                                onmouseover="this.style.color='{{ $social->color }}'" onmouseout="this.style.color=''"
+                                title="{{ $social->name }}">
+                                <i class="fab {{ $social->icon }}"></i>
+                            </a>
+                        @endforeach
+                            
                     </div>
                 </div>
 
@@ -62,9 +53,15 @@
                         <div
                             class="profile-photo-inner bg-gray-100 dark:bg-gray-900 border-gray-100 dark:border-gray-900 transition-colors duration-500">
                             <!-- Placeholder for Profile Photo -->
+                            @if($hero->hero_img && !empty($hero->hero_img))
+                                <img src="{{ asset('storage/' . $hero->hero_img) }}"
+                                    alt="Shakhawat Hosen Profile" class="w-full h-full object-cover rounded-full p-2"
+                                    onerror="this.style.display='none'; this.closest('.profile-photo-inner').innerHTML='<i class=\'fa-solid fa-user text-9xl text-gray-500\'></i>'">
+                            @else
                             <img src="https://placehold.co/270x270/f3f4f6/1f2937?text=SHAKHAWAT"
                                 alt="Shakhawat Hosen Profile" class="w-full h-full object-cover rounded-full p-2"
                                 onerror="this.style.display='none'; this.closest('.profile-photo-inner').innerHTML='<i class=\'fa-solid fa-user text-9xl text-gray-500\'></i>'">
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -72,7 +69,7 @@
         </section>
 
         <!-- 2. About Me Section -->
-        <section id="about" class="py-16 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
+        <section id="about" class="{{ $about == "" ? 'hidden': '' }} py-16 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
                     <span class="border-b-4 border-indigo-500 pb-1">About Me</span>
@@ -100,8 +97,8 @@
                         <h3 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">
                             {{ $about->title ?? 'Laravel Developer & Web Enthusiast' }}
                         </h3>
-                        <p class="text-lg text-gray-600 dark:text-gray-400 leading-relaxed mb-6">
-                            {!! nl2br(e($about->description)) ??
+                        <p class="text-lg text-gray-600 dark:text-gray-400 text-justify md:text-left mx-2 leading-relaxed mb-6">
+                            {!! nl2br(e($about->description ?? '')) ??
                                 'I am a passionate Laravel developer with experience in building dynamic and responsive web applications. I specialize in creating clean, efficient, and scalable code while focusing on user experience and performance. My expertise includes working with databases, RESTful APIs, and front-end technologies to deliver complete solutions.' !!}
                         </p>
                     </div>
@@ -110,7 +107,7 @@
         </section>
 
         <!-- 3. Skill Section -->
-        <section id="skill" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="skill" class="{{ count($skills) > 0 ? '' : 'hidden' }} py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
                 <span class="border-b-4 border-indigo-500 pb-1">My Skills</span>
             </h2>
@@ -189,7 +186,7 @@
         </section>
 
         <!-- 4. Projects Section -->
-        <section id="projects" class="py-16 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
+        <section id="projects" class="{{ count($projects) > 0 ? '' : 'hidden' }} py-16 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
                     <span class="border-b-4 border-indigo-500 pb-1">Featured Projects</span>
@@ -201,11 +198,11 @@
                     <!-- Project Card Component -->
                     @foreach ($projects as $project)
                         <a href="{{ route('project.show', $project->slug) }}"
-                            class="group block bg-white dark:bg-gray-700/50 rounded-2xl shadow-xl overflow-hidden transform hover:scale-[1.02] transition-all duration-500">
+                            class="group block bg-white dark:bg-gray-700/50 rounded-2xl shadow-xl overflow-hidden transform hover:scale-[1.02] ">
                             <div class="w-full h-48 overflow-hidden">
                                 <img src="{{ asset('storage/' . $project->thumbnail) }}"
                                     alt="Project {{ $project->index }}"
-                                    class="w-full h-full object-cover group-hover:opacity-75 transition-opacity duration-300"
+                                    class="w-full h-full object-cover "
                                     style="border-bottom-left-radius: 2rem; border-bottom-right-radius: 2rem;">
                             </div>
 
@@ -219,7 +216,7 @@
                                 @endforeach
 
                                 <p class="text-gray-600 dark:text-gray-400 text-sm mb-4 line-clamp-3">
-                                    {{ $project->description }}</p>
+                                    {{ $project->short_description }}</p>
 
                                 <div class="flex space-x-3 text-xl justify-center md:justify-start">
                                     @foreach ($project->skills->take(11) as $skill)
@@ -245,8 +242,8 @@
         </section>
 
         <!-- 4.5. Education & Experience Section -->
-        <section id="timeline" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
+        <section id="timeline" class=" {{ count($educations) > 0 || count($experiences) > 0 ? '' : 'hidden' }} py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-extrabold text-center leading-relaxed text-gray-900 dark:text-white mb-12">
                 <span class="border-b-4 border-indigo-500 pb-1">Education & Experience</span>
             </h2>
             <div class="flex flex-col md:flex-row  gap-12">
@@ -340,25 +337,23 @@
         </section>
 
         <!-- 4.65. Certifications Section -->
-        <section id="certifications" class="py-16 bg-white dark:bg-gray-900 transition-colors duration-500">
+        <section id="certifications" class="{{ count($certifications) > 0 ? '' : 'hidden' }} py-16 bg-white dark:bg-gray-900 transition-colors duration-500">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
                     <span class="border-b-4 border-indigo-500 pb-1">Certifications</span>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    @php
-                        $certifications = [];
-                    @endphp
+                    
                     @forelse ($certifications as $cert)
                         <div
                             class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
-                            <img src="{{ asset('storage/' . $cert->image) }}" alt="{{ $cert->title }}"
-                                class="w-24 h-24 object-cover rounded-full mb-4 border-4 border-indigo-500"
+                            <img src="{{ asset('storage/' . $cert->certificate_path) }}" alt="{{ $cert->name }}"
+                                class=" object-cover rounded mb-4 border-1 border-indigo-500"
                                 onerror="this.style.display='none'; this.closest('div').innerHTML+='<div class=\'w-24 h-24 flex items-center justify-center bg-gray-200 dark:bg-gray-700 rounded-full mb-4\'><i class=\'fa-solid fa-certificate text-4xl text-gray-400\'></i></div>'">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ $cert->title }}</h3>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ $cert->name }}</h3>
                             <span
-                                class="block text-sm text-indigo-500 dark:text-indigo-400 mb-2">{{ $cert->duration }}</span>
-                            <p class="text-gray-600 dark:text-gray-300 text-base">{{ $cert->description }}</p>
+                                class="block text-sm text-indigo-500 dark:text-indigo-400 mb-2">{{ $cert->date_obtained }}</span>
+                            <p class="text-gray-600 dark:text-gray-300 text-base">{{ $cert->score }}</p>
                         </div>
                     @empty
                         <div class="col-span-3 text-center text-gray-600 dark:text-gray-300">
@@ -369,118 +364,61 @@
             </div>
         </section>
 
-
         <!-- 4.7. Services Section -->
-        <section id="services" class="py-16 bg-white dark:bg-gray-900 transition-colors duration-500">
+        <section id="services" class="{{ count($services) > 0 ? '' : 'hidden' }} py-16 bg-white dark:bg-gray-900 transition-colors duration-500">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
                     <span class="border-b-4 border-indigo-500 pb-1">My Services</span>
                 </h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                    <!-- Service 1 -->
-                    <div
-                        class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
-                        <i class="fa-solid fa-code text-5xl text-indigo-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Web Application Development
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-base">Custom, scalable web apps using Laravel
-                            and modern frontend frameworks for your business needs.</p>
-                    </div>
-                    <!-- Service 2 -->
-                    <div
-                        class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
-                        <i class="fa-solid fa-database text-5xl text-violet-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">API Development & Integration
-                        </h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-base">Robust RESTful and GraphQL APIs,
-                            third-party integrations, and secure data exchange solutions.</p>
-                    </div>
-                    <!-- Service 3 -->
-                    <div
-                        class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
-                        <i class="fa-solid fa-mobile-screen-button text-5xl text-pink-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Responsive UI/UX Design</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-base">Pixel-perfect, mobile-friendly interfaces
-                            with Tailwind CSS and best UX practices.</p>
-                    </div>
-                    <!-- Service 4 -->
-                    <div
-                        class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
-                        <i class="fa-solid fa-shield-halved text-5xl text-teal-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Security & Performance</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-base">Implementing authentication,
-                            authorization, and optimization for secure and fast web solutions.</p>
-                    </div>
-                    <!-- Service 5 -->
-                    <div
-                        class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
-                        <i class="fa-solid fa-cloud-arrow-up text-5xl text-sky-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Cloud Deployment</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-base">Deploying and managing web applications
-                            on
-                            AWS, DigitalOcean, and other cloud platforms.</p>
-                    </div>
-                    <!-- Service 6 -->
-                    <div
-                        class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
-                        <i class="fa-solid fa-gears text-5xl text-yellow-500 mb-4"></i>
-                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Maintenance & Support</h3>
-                        <p class="text-gray-600 dark:text-gray-400 text-base">Ongoing support, bug fixes, and feature
-                            enhancements to keep your project running smoothly.</p>
-                    </div>
+                    @forelse ($services as $service)
+                        <div
+                            class="bg-gray-100 dark:bg-gray-800 rounded-2xl shadow-xl p-8 text-center transition-colors duration-500 hover:shadow-2xl hover:-translate-y-2">
+                            <i class="{{ $service->icon }} text-5xl  mb-4" style="color: {{ $service->color }};"></i>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">{{ $service->title }}</h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-base">{{ $service->description }}</p>
+                        </div>
+                    @empty
+                        <div class="col-span-3 text-center text-gray-600 dark:text-gray-300">
+                            No services available.
+                        </div>
+                    @endforelse
+
                 </div>
             </div>
         </section>
 
         <!-- 4.8. Testimonials Section -->
-        <section id="testimonials" class="py-16 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
+        <section id="testimonials" class="{{ count($testimonials) > 0 ? '' : 'hidden' }} py-16 bg-gray-100 dark:bg-gray-800 transition-colors duration-500">
             <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
                     <span class="border-b-4 border-indigo-500 pb-1">Testimonials</span>
                 </h2>
                 <div class="swiper testimonials-swiper">
                     <div class="swiper-wrapper">
-
-                        <!-- Testimonial 1 -->
-                        <div class="swiper-slide">
-                            <div
-                                class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transition-colors duration-500">
-                                <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="John Doe"
-                                    class="w-20 h-20 rounded-full mb-4 border-4 border-indigo-500 object-cover">
-                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">John Doe</h3>
-                                <p class="text-sm text-indigo-500 mb-3">Senior Software Engineer, TechCorp</p>
-                                <p class="text-gray-600 dark:text-gray-300 italic">"Shakhawat is a highly skilled
-                                    Laravel developer. His attention to detail and dedication to clean code made our
-                                    project a huge success."</p>
+                       
+                        @forelse ($testimonials as $testimonial)
+                            <div class="swiper-slide">
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transition-colors duration-500">
+                                    <img src="{{ $testimonial->photo ? asset('storage/'.$testimonial->photo) : 'https://placehold.co/150x150?text=No+Image' }}" alt="{{ $testimonial->name }}"
+                                        class="w-20 h-20 rounded-full mb-4 border-4 border-indigo-500 object-cover">
+                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">{{ $testimonial->name }}</h3>
+                                    <p class="text-sm text-indigo-500 mb-3">{{ $testimonial->position }}</p>
+                                    <p class="text-gray-600 dark:text-gray-300 italic">"{{ $testimonial->message }}"</p>
+                                </div>
                             </div>
-                        </div>
+                        @empty
+                            <div class="swiper-slide">
+                                <div
+                                    class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transition-colors duration-500">
 
-                        <!-- Testimonial 2 -->
-                        <div class="swiper-slide">
-                            <div
-                                class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transition-colors duration-500">
-                                <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Jane Smith"
-                                    class="w-20 h-20 rounded-full mb-4 border-4 border-violet-500 object-cover">
-                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Jane Smith</h3>
-                                <p class="text-sm text-violet-500 mb-3">Project Manager, Webify</p>
-                                <p class="text-gray-600 dark:text-gray-300 italic">"Working with Shakhawat was a
-                                    pleasure. He delivered robust APIs and always communicated clearly throughout the
-                                    process."</p>
+                                    <h3 class="text-lg font-bold text-gray-900 dark:text-white">No Testimonials</h3>
+                                </div>
                             </div>
-                        </div>
+                        @endforelse
 
-                        <!-- Testimonial 3 -->
-                        <div class="swiper-slide">
-                            <div
-                                class="bg-white dark:bg-gray-900 rounded-2xl shadow-xl p-8 flex flex-col items-center text-center transition-colors duration-500">
-                                <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Michael Lee"
-                                    class="w-20 h-20 rounded-full mb-4 border-4 border-pink-500 object-cover">
-                                <h3 class="text-lg font-bold text-gray-900 dark:text-white">Michael Lee</h3>
-                                <p class="text-sm text-pink-500 mb-3">CTO, StartupX</p>
-                                <p class="text-gray-600 dark:text-gray-300 italic">"His expertise in both backend and
-                                    frontend made our SaaS platform reliable and user-friendly. Highly recommended!"</p>
-                            </div>
-                        </div>
+
 
                     </div>
                     <!-- Swiper Pagination & Navigation -->
@@ -492,44 +430,29 @@
         </section>
 
         <!-- 4.9. Key Achievements Section -->
-        <section id="achievements" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section id="achievements" class="{{ count($achievements) > 0 ? '' : 'hidden' }} py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 class="text-4xl font-extrabold text-center text-gray-900 dark:text-white mb-12">
                 <span class="border-b-4 border-indigo-500 pb-1">Key Achievements</span>
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
                 <!-- Years of Experience -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
-                    <i class="fa-solid fa-calendar-check text-5xl text-indigo-500 mb-4"></i>
-                    <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">7+</div>
-                    <div class="text-lg font-medium text-gray-600 dark:text-gray-300">Years Experience</div>
-                </div>
-                <!-- Projects Completed -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
-                    <i class="fa-solid fa-diagram-project text-5xl text-violet-500 mb-4"></i>
-                    <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">50+</div>
-                    <div class="text-lg font-medium text-gray-600 dark:text-gray-300">Projects Completed</div>
-                </div>
-                <!-- Happy Clients -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
-                    <i class="fa-solid fa-face-smile text-5xl text-pink-500 mb-4"></i>
-                    <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">30+</div>
-                    <div class="text-lg font-medium text-gray-600 dark:text-gray-300">Happy Clients</div>
-                </div>
-                <!-- Hours of Work -->
-                <div
-                    class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
-                    <i class="fa-solid fa-clock text-5xl text-sky-500 mb-4"></i>
-                    <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">10,000+</div>
-                    <div class="text-lg font-medium text-gray-600 dark:text-gray-300">Hours of Work</div>
-                </div>
+                @forelse ($achievements as $achievement)
+                    <div
+                        class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 flex flex-col items-center transition-colors duration-500">
+                        <i class="{{ $achievement->icon }} text-5xl  mb-4" style="color: {{ $achievement->color }}"></i>
+                        <div class="text-4xl font-extrabold text-gray-900 dark:text-white mb-2">{{ $achievement->value }}</div>
+                        <div class="text-lg font-medium text-gray-600 dark:text-gray-300">{{ $achievement->title }}</div>
+                    </div>
+                @empty
+                    <div class="col-span-4 text-center text-gray-600 dark:text-gray-300">
+                        No achievements available.
+                    </div>
+                @endforelse
             </div>
         </section>
 
         <!-- 4.95. Work With Brands Section -->
-        <section id="brands" class="py-16 bg-white dark:bg-gray-900 transition-colors duration-500">
+        <section id="brands" class="{{ count($brands) > 0 ? '' : 'hidden' }} py-16 bg-white dark:bg-gray-900 transition-colors duration-500">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <!-- Section Header -->
                 <div class="text-center mb-16">
@@ -544,125 +467,21 @@
 
                 <!-- Brand Cards Grid -->
                 <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6">
-                    <!-- Google -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/google/google-original.svg"
-                                alt="Google" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Google</h3>
-                    </div>
 
-                    <!-- Microsoft -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoft/microsoft-original.svg"
-                                alt="Microsoft" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
+                    @forelse ($brands as $brand)
+                        <div
+                            class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
+                            <div class="w-full h-auto mb-4 flex items-center justify-center overflow-hidden">
+                                <img src="{{ asset('storage/'.$brand->logo) }}"
+                                    alt="{{ $brand->name }}" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
+                            </div>
+                            <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">{{ $brand->name }}</h3>
                         </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Microsoft</h3>
-                    </div>
-
-                    <!-- Amazon -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazon/amazon-original.svg"
-                                alt="Amazon" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
+                    @empty
+                        <div class="col-span-6 text-center text-gray-600 dark:text-gray-300">
+                            No brands available.
                         </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Amazon</h3>
-                    </div>
-
-                    <!-- Meta (Facebook) -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/facebook/facebook-original.svg"
-                                alt="Meta" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Meta</h3>
-                    </div>
-
-                    <!-- Apple -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apple/apple-original.svg"
-                                alt="Apple" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Apple</h3>
-                    </div>
-
-                    <!-- IBM -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/ibm/ibm-original.svg"
-                                alt="IBM" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">IBM</h3>
-                    </div>
-
-                    <!-- Netflix -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/netflix/netflix-original.svg"
-                                alt="Netflix" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Netflix</h3>
-                    </div>
-
-                    <!-- Spotify -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spotify/spotify-original.svg"
-                                alt="Spotify" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Spotify</h3>
-                    </div>
-
-                    <!-- Twitter -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg"
-                                alt="Twitter" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Twitter</h3>
-                    </div>
-
-                    <!-- LinkedIn -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
-                                alt="LinkedIn" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">LinkedIn</h3>
-                    </div>
-
-                    <!-- WordPress -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-original.svg"
-                                alt="WordPress" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">WordPress</h3>
-                    </div>
-
-                    <!-- Shopify -->
-                    <div
-                        class="brand-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl flex flex-col items-center justify-center group">
-                        <div class="w-16 h-16 mb-4 flex items-center justify-center overflow-hidden">
-                            <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/shopify/shopify-original.svg"
-                                alt="Shopify" class="h-full w-full object-contain grayscale group-hover:grayscale-0">
-                        </div>
-                        <h3 class="text-sm font-semibold text-gray-800 dark:text-gray-200 text-center">Shopify</h3>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </section>
@@ -677,45 +496,66 @@
                 class="flex flex-col md:flex-row items-center gap-10 bg-white dark:bg-gray-800 p-8 rounded-2xl shadow-2xl transition-colors duration-500">
                 <!-- Left Side: Contact Vector/Icon -->
                 <div class="md:w-1/2 flex justify-center">
-                    <i class="fa-solid fa-paper-plane text-[15rem] text-indigo-500 opacity-70"></i>
+                    <img src="{{ asset('img/contact.jpg') }}" alt="contact illustration" class="rounded">
                 </div>
 
                 <!-- Right Side: Contact Form -->
                 <div class="md:w-1/2 w-full">
-                    <form class="space-y-6">
+                    <form class="space-y-6" method="POST" action="{{ route('contact.store') }}">
+                        @csrf
                         <div>
-                            <label for="name" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Your
-                                Name</label>
+                            <label for="name" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Your Name</label>
                             <input type="text" id="name" name="name" required
-                                class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none">
+                                class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none @error('name') border-red-500 dark:border-red-500 @enderror"
+                                value="{{ old('name') }}">
+                            @error('name')
+                                <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div>
-                            <label for="email" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Your
-                                Email</label>
+                            <label for="email" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Your Email</label>
                             <input type="email" id="email" name="email" required
-                                class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none">
+                                class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none @error('email') border-red-500 dark:border-red-500 @enderror"
+                                value="{{ old('email') }}">
+                            @error('email')
+                                <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div>
-                            <label for="subject"
-                                class="block text-sm font-medium text-gray-600 dark:text-gray-300">Subject</label>
+                            <label for="subject" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Subject</label>
                             <input type="text" id="subject" name="subject" required
-                                class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none">
+                                class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none @error('subject') border-red-500 dark:border-red-500 @enderror"
+                                value="{{ old('subject') }}">
+                            @error('subject')
+                                <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div>
-                            <label for="message"
-                                class="block text-sm font-medium text-gray-600 dark:text-gray-300">Message</label>
+                            <label for="message" class="block text-sm font-medium text-gray-600 dark:text-gray-300">Message</label>
                             <textarea id="message" name="message" rows="5" required
-                                class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none"></textarea>
+                                class="mt-1 block w-full px-4 py-3 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:ring-indigo-500 focus:border-indigo-500 transition-colors duration-300 focus:outline-none @error('message') border-red-500 dark:border-red-500 @enderror">{{ old('message') }}</textarea>
+                            @error('message')
+                                <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                            @enderror
                         </div>
                         <div>
                             <button type="submit"
-                                class="w-full flex justify-center items-center px-6 py-3 text-base font-medium rounded-xl shadow-lg text-white btn-primary focus:outline-none">
+                                class="w-full flex cursor-pointer justify-center items-center px-6 py-3 text-base font-medium rounded-xl shadow-lg text-white btn-primary focus:outline-none">
                                 <i class="fa-solid fa-paper-plane mr-2"></i> Send Message
                             </button>
                         </div>
                     </form>
                 </div>
             </div>
+            {{-- show success msg --}}
+            @if (session('success'))
+                <div
+                    class="mt-6 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg flex items-center"
+                    role="alert">
+                    <i class="fa-solid fa-circle-check mr-2"></i>
+                    <span class="font-medium">{{ session('success') }}</span>
+                </div>
+            @endif
         </section>
     </main>
 @endsection

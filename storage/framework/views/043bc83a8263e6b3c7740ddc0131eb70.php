@@ -37,9 +37,9 @@
                 </div>
 
                 <!-- 15+ Links -->
-                <a href="#"
+                <a href="<?php echo e(route('admin.hero')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-shopping-bag w-6 mr-2"></i><span>Products</span>
+                    <i class="fas fa-layer-group w-6 mr-2"></i><span>Hero</span>
                 </a>
                 <a href="<?php echo e(route('admin.about')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
@@ -65,47 +65,41 @@
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
                     <i class="fas fa-briefcase w-6 mr-2"></i><span>Experiences</span>
                 </a>
-                <a href="#"
+                <a href="<?php echo e(route('admin.services')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-file-invoice w-6 mr-2"></i><span>Billing</span>
+                    <i class="fas fa-concierge-bell w-6 mr-2"></i><span>Services</span>
                 </a>
-                <a href="#"
+                <a href="<?php echo e(route('admin.testimonials')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-shield-halved w-6 mr-2"></i><span>Security Logs</span>
+                    <i class="fas fa-comments w-6 mr-2"></i><span>Testimonials</span>
                 </a>
-                <a href="#"
+                <a href="<?php echo e(route('admin.achievements')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-database w-6 mr-2"></i><span>Database</span>
+                    <i class="fas fa-trophy w-6 mr-2"></i><span>Achievements</span>
                 </a>
-                <a href="#"
+                <a href="<?php echo e(route('admin.brands')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-code w-6 mr-2"></i><span>API Reference</span>
+                    <i class="fab fa-flickr w-6 mr-2"></i><span>Brands</span>
                 </a>
-                <a href="#"
+                <a href="<?php echo e(route('admin.contacts')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-folder-tree w-6 mr-2"></i><span>File Manager</span>
+                    <i class="fas fa-envelope w-6 mr-2"></i><span>Contacts</span>
                 </a>
-                <a href="#"
+                <a href="<?php echo e(route('admin.socials')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-terminal w-6 mr-2"></i><span>Terminal</span>
+                    <i class="fab fa-twitter w-6 mr-2"></i><span>Socials</span>
                 </a>
-                <a href="#"
+                <a href="<?php echo e(route('admin.cv')); ?>"
                     class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-map w-6 mr-2"></i><span>Track Orders</span>
+                    <i class="fas fa-file-alt w-6 mr-2"></i><span>My CV</span>
                 </a>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-ticket w-6 mr-2"></i><span>Support Tickets</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-cog w-6 mr-2"></i><span>General Settings</span>
-                </a>
-                <a href="#"
-                    class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
-                    <i class="fas fa-life-ring w-6 mr-2"></i><span>Help Desk</span>
-                </a>
+                
 
+                <a href="<?php echo e(route('admin.certifications')); ?>"
+                    class="flex items-center px-4 py-3 text-sm font-semibold text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-slate-700 hover:text-blue-600 dark:hover:text-white rounded-xl transition-all">
+                    <i class="fas fa-certificate w-6 mr-2"></i><span>Certifications</span> 
+                </a>
+                
 
                 <div>
                     <button onclick="toggleSubmenu('sub-auth')"

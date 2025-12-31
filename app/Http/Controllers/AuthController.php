@@ -29,7 +29,7 @@ class AuthController extends Controller
             $userModel->save();
             return redirect()->route('admin.dashboard')->with('success', 'Login successful!');
         } else {
-            return redirect()->route('login')->with('noaccerror', 'No account found for this Google email.');
+            return redirect()->route('login')->with('error', 'No account found for this Google email.');
         }
 
         return redirect()->route('home');
@@ -44,9 +44,7 @@ class AuthController extends Controller
             return redirect()->route('admin.dashboard')->with('success', 'Login successful!');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->with('error', 'The provided credentials do not match our records.');
     }
 
     public function logout()

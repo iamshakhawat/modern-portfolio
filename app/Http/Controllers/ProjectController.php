@@ -34,6 +34,7 @@ class ProjectController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:255|unique:projects,title',
+            'short_description' => 'required|string|max:500',
             'description' => 'required|string',
             'date' => 'required|date',
             'client' => 'required|string|max:255',
@@ -56,6 +57,7 @@ class ProjectController extends Controller
         $project = new Project();
         $project->title = $request->title;
         $project->slug = Str::slug($request->title);
+        $project->short_description = $request->short_description;
         $project->description = $request->description;
         $project->date = $request->date;
         $project->client = $request->client;
@@ -114,6 +116,7 @@ class ProjectController extends Controller
 
         $request->validate([
             'title' => 'required|string|max:255|unique:projects,title,' . $project->id,
+            'short_description' => 'required|string|max:500',
             'description' => 'required|string',
             'date' => 'required|date',
             'client' => 'required|string|max:255',
@@ -134,6 +137,7 @@ class ProjectController extends Controller
 
         $project->title = $request->title;
         $project->slug = Str::slug($request->title);
+        $project->short_description = $request->short_description;
         $project->description = $request->description;
         $project->date = $request->date;
         $project->client = $request->client;

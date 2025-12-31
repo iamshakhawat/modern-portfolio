@@ -2,25 +2,42 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cv;
+use App\Models\Hero;
 use App\Models\About;
+use App\Models\Brand;
 use App\Models\Skill;
+use App\Models\Social;
+use App\Models\Contact;
 use App\Models\Project;
+use App\Models\Service;
 use App\Models\Category;
 use App\Models\Education;
 use App\Models\Experience;
+use App\Models\Achievement;
+use App\Models\Testimonial;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Models\Certification;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $hero = Hero::first();
         $about = About::first();
         $skills = Skill::where('status', 1)->get();
-        $projects = Project::where('status', 1)->limit(6)->get();
+        $projects = Project::where('status', 1)->where('is_featured', 1)->limit(6)->get();
         $educations = Education::all();
         $experiences = Experience::all();
-        return view('home', compact('about', 'skills', 'projects', 'educations', 'experiences'));
+        $certifications = Certification::where('status', 1)->where('featured', 1)->latest()->limit(6)->get();
+        $services = Service::where('status', 1)->where('featured', 1)->get();
+        $testimonials = Testimonial::where('status', 1)->get();
+        $achievements = Achievement::where('status', 1)->latest()->limit(4)->get();
+        $brands = Brand::where('status', 1)->get();
+        $socials = Social::where('status', 1)->get();
+
+        return view('home', compact('hero', 'about', 'skills', 'projects', 'educations', 'experiences', 'services', 'testimonials', 'achievements', 'brands', 'certifications', 'socials'));
     }
 
     public function showProject($slug)
@@ -120,5 +137,35 @@ class HomeController extends Controller
         }
 
         return response('');
+    }
+    public function storeContact(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        $contact = new Contact();
+        $contact->name = $request->name;
+        $contact->email = $request->email;
+        $contact->subject = $request->subject;
+        $contact->message = $request->message;
+        $contact->save();
+
+        return redirect()->back()->with('success', 'Your message has been sent successfully!')->withFragment('contact');
+    }
+
+    // download CV
+    public function downloadCV()
+    {
+        $cv = Cv::first();
+        if (! $cv) {
+            return redirect()->back()->with('error', 'CV not found.');
+        } else {
+            $filePath = storage_path('app/public/' . $cv->file_path) ?? null;
+            return response()->download($filePath);
+        }
     }
 }

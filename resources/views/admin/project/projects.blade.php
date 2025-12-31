@@ -57,7 +57,7 @@
                                             class="w-16 h-16 object-cover rounded-lg">
                                     </td>
                                     <td class="px-4 py-3 text-sm text-gray-700 dark:text-gray-300 scapitalize">
-                                        {{ $project->title }}
+                                        <a class="hover:underline" target="_blank" href="{{ route('project.show',$project->slug) }}">{{ $project->title }}</a>
                                         <div class="mb-2 mt-2">
                                             @foreach ($project->skills as $skill)
                                                 <i style="color: {{ $skill->color }}"

@@ -36,6 +36,26 @@ endif;
 unset($__errorArgs, $__bag); ?>
                     </div>
 
+                    
+                    <div class="mb-5">
+                        <label for="short_description"
+                            class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Short Description <span
+                                class="text-red-500">*</span></label>
+                        <textarea name="short_description" id="short_description" rows="4"
+                            class="w-full px-4 py-2 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                            placeholder="Enter project short description" ><?php echo e(old('short_description', $project->short_description)); ?></textarea>
+                        <?php $__errorArgs = ['short_description'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                            <span class="text-xs text-red-500"><?php echo e($message); ?></span>
+                        <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    </div>
+
                     <div class="mb-5">
                         <label for="description"
                             class="block text-sm font-bold mb-2 text-gray-700 dark:text-gray-300">Description <span

@@ -17,21 +17,17 @@ class ProjectSeeder extends Seeder
     {
         if (Storage::disk('public')->exists('thumbnails')) {
             Storage::disk('public')->deleteDirectory('thumbnails');
-            $this->command->info("Deleted 'thumbnails' directory.");
         }
 
         if (Storage::disk('public')->exists('projects')) {
             Storage::disk('public')->deleteDirectory('projects');
-            $this->command->info("Deleted 'projects' directory.");
         }
  
         $project_percentage = 0;
 
         // Re-create folders
         Storage::disk('public')->makeDirectory('thumbnails');
-        $this->command->info("Created 'thumbnails' directory.");
         Storage::disk('public')->makeDirectory('projects');
-        $this->command->info("Created 'projects' directories.");
 
         
         $faker = Faker::create();
@@ -45,21 +41,6 @@ class ProjectSeeder extends Seeder
             'Task Management System',
             'Learning Management System',
             'Online Booking Application',
-            'Hospital Management Software',
-            'Inventory Management Tool',
-            'Blog & CMS Platform',
-            'Job Portal Application',
-            'Real Estate Listing System',
-            'Social Media Analytics Dashboard',
-            'Realtime Chat Application',
-            'Personal Expense Tracker',
-            'Weather Forecast Application',
-            'Fitness Tracking Platform',
-            'Event Management System',
-            'Restaurant Ordering System',
-            'Travel Booking Platform',
-            'HR Management System',
-            'Online Examination Platform',
         ];
 
         $thumbnailSources = [
@@ -68,21 +49,6 @@ class ProjectSeeder extends Seeder
             'https://images.unsplash.com/photo-1551288049-bebda4e38f71',
             'https://images.unsplash.com/photo-1522202176988-66273c2fd55f',
             'https://images.unsplash.com/photo-1504384308090-c894fdcc538d',
-            'https://images.unsplash.com/photo-1576091160399-112ba8d25d1f',
-            'https://images.unsplash.com/photo-1581090700227-1e37b190418e',
-            'https://images.unsplash.com/photo-1521737604893-d14cc237f11d',
-            'https://images.unsplash.com/photo-1542744173-8e7e53415bb0',
-            'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
-            'https://images.unsplash.com/photo-1558655146-9f40138edfeb',
-            'https://images.unsplash.com/photo-1516321318423-f06f85e504b3',
-            'https://images.unsplash.com/photo-1526378722484-bd91ca387e72',
-            'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429',
-            'https://images.unsplash.com/photo-1518611012118-f0c5b0a0c2f3',
-            'https://images.unsplash.com/photo-1531482615713-2afd69097998',
-            'https://images.unsplash.com/photo-1514516873439-d295d7fba8b5',
-            'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee',
-            'https://images.unsplash.com/photo-1521737604893-d14cc237f11d',
-            'https://images.unsplash.com/photo-1584697964192-74d5c6d6c39a',
         ];
 
         foreach ($titles as $index => $title) {
@@ -100,6 +66,7 @@ class ProjectSeeder extends Seeder
             $project = Project::create([
                 'title'        => $title,
                 'slug'         => Str::slug($title),
+                'short_description' => $faker->sentence(),
                 'description'  => $this->markdownDescription($title),
                 'date'         => $faker->date(),
                 'client'       => $faker->company(),
@@ -109,8 +76,8 @@ class ProjectSeeder extends Seeder
                 'github_url'   => 'https://github.com/example/repo',
                 'user_id'      => 1,
                 'thumbnail'    => $thumbnailPath,
-                'status'       => $index < 15,
-                'is_featured'  => $index < 6,
+                'status'       => true,
+                'is_featured'  => true,
             ]);
 
             /* ---------------- Project Images (4+) ---------------- */
@@ -154,9 +121,6 @@ class ProjectSeeder extends Seeder
                     'updated_at' => now(),
                 ]);
             }
-            $project_percentage++;
-            $percentage = round(($project_percentage / count($titles)) * 100);
-            $this->command->info("Progress: {$percentage}%");
         }
     }
 

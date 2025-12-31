@@ -80,8 +80,8 @@
 
         /* Hero Section Glow Effect for Profile Photo Placeholder */
         .profile-photo-container {
-            width: 280px;
-            height: 280px;
+            width: 320px;
+            height: 320px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--primary-color), var(--accent-color), #ec4899);
             padding: 4px;

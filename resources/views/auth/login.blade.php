@@ -140,7 +140,7 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            @if(@session('noaccerror'))
+            @if(@session('error'))
                 Swal.fire({
                     icon: 'error',
                     title: 'Login Failed',

@@ -64,8 +64,8 @@
 
 
                     <!-- Article Body -->
-                    <div id="content" class="text-slate-900 dark:text-white">
-                        <?php echo e($project->description); ?>
+                    <div id="content" class="porse markdown max-w-none prose-slate dark:prose-invert prose-a:text-indigo-600 prose-a:dark:text-indigo-400 prose-a:no-underline hover:prose-a:underline prose-img:rounded-xl prose-img:shadow-lg">
+                        <?php echo Illuminate\Support\Str::markdown($project->description); ?>
 
                     </div>
 
@@ -159,16 +159,6 @@
     </main>
 <?php $__env->stopSection(); ?>
 <?php $__env->startPush('css'); ?>
-
-
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    
 <?php $__env->stopPush(); ?>
 
-<?php $__env->startPush('css'); ?>
-    <script>
-        document.getElementById('content').innerHTML =
-            marked.parse(document.getElementById('content').innerText);
-    </script>
-<?php $__env->stopPush(); ?>
 <?php echo $__env->make('layout.web.web', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\Shakhawat\Desktop\Portfolio\resources\views/project-details.blade.php ENDPATH**/ ?>
